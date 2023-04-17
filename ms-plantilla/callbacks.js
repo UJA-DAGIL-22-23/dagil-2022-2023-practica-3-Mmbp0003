@@ -14,10 +14,10 @@ const faunadb = require('faunadb'),
     q = faunadb.query;
 
 const client = new faunadb.Client({
-    secret: '¿¿¿ CLAVE SECRETA EN FAUNA PARA ESTA BBDD???',
+    secret: 'fnAFBcoDRRAAzULlXEizIA0AT4iya81kHKLXM0Uy',
 });
 
-const COLLECTION = "¿¿¿ COLECCION ???"
+const COLLECTION = "Curling"
 
 // CALLBACKS DEL MODELO
 
@@ -60,7 +60,22 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
+    getJugadores: async (req,res) => {
+        try {
+            let jugadores = await client.query (
+                q.Map(
+                    q.Paginate(q.Documents(q.Collections(COLLECTION))),
+                    q.Lambda("X", q.Get(q.Var("x")))
+                )
+            )
+            CORS(res)
+                .status(200)
+                .json(jugadores)({})
+        }catch(error){
+            CORS(res).status(500).json({error: error.description })
+        }
 
+    }
 }
 
 
@@ -93,9 +108,9 @@ const CB_OTHERS = {
         try {
             CORS(res).status(200).json({
                 mensaje: "Microservicio MS Plantilla: acerca de",
-                autor: "¿¿¿ AUTOR ???",
-                email: "¿¿¿ EMAIL ???",
-                fecha: "¿¿¿ FECHA ???"
+                autor: "Magdalena Bueno Pedrera",
+                email: "mmbp0003@red.ujaen.es",
+                fecha: "19/01/2001"
             });
         } catch (error) {
             CORS(res).status(500).json({ error: error.description })

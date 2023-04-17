@@ -1,4 +1,4 @@
-/**
+ /**
  * @file front-end.js
  * @description Funciones comunes para todos los módulos de front-end. Debe cargarse la primera de todas.
  * @author Víctor M. Rivas <vrivas@ujaen.es>

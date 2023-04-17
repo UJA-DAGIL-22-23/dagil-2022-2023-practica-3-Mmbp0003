@@ -18,6 +18,17 @@ Plantilla.datosDescargadosNulos = {
     fecha: ""
 }
 
+Plantilla.jugadoresCurling = {
+    id: "undefined",
+    nombre_jugador: "undefined",
+    fecha_nacimiento: "undefined",
+    participacion_juegos_olimpicos: "undefined",
+    equipo: "undefined",
+    categorias_jugadas: "undefined",
+    victorias: "undefined",
+    derrotas: "undefined"
+}
+
 
 /**
  * Función que descarga la info MS Plantilla al llamar a una de sus rutas
@@ -105,6 +116,77 @@ Plantilla.procesarHome = function () {
  */
 Plantilla.procesarAcercaDe = function () {
     this.descargarRuta("/plantilla/acercade", this.mostrarAcercaDe);
+}
+
+
+/*
+   Aqui vamos a implementar las funciones necesarias para la segunda historia de usuario
+   Queremos imprimer por pantalla los nombres de los jugadores
+ */
+
+/**
+ * @brief Creare la tabla para la primera Historia de Usuario, enseñaremos los nombres de los jugadores de nuestra base
+ *        de datos
+ * @constructor creamos la tabla que veremos en la pagina
+ */
+Plantilla.TablaNombres = {}
+Plantilla.CabeceraJugadores = function() {
+    return `<table> 
+        <thead>
+            <th>Nombre</th>                                    
+        </thead>
+        `
+}
+
+Plantilla.CuerpoJugadores = function (_curling) {
+    const curling = _curling.data
+    return `<tbody>
+            <tr title="Cuerpo Jugadores">
+                <td>${curling.nombre_jugador}</td>
+            </tr>
+            </tbody>
+            </table>`;
+}
+
+/**
+ * En esta función solo se mostrara los nombres de los jugadores de nuestra base de datos
+ */
+
+Plantilla.Nombres_Jugadores = function (vector){
+    let x = "";
+     x += Plantilla.CabeceraNombre
+    //Miramos que lo que se esta pasando por entrada es una funcion
+    //Añadimos el contenido del cuerpo
+     vector.forEach(e => x += Plantilla.CuerpoJugadores(e))
+     Frontend.Article.actualizar("Son los nombres de los jugadores del deporte Curling",x)
+}
+
+/**
+ * @param Recupera los datos de jugadores de la plantilla creada
+ * @param callbackFn
+ * @returns {Promise<void>}
+ */
+Plantilla.recupera = async function (callbackFn){
+    let response = null
+    try{
+        const url = Frontend.API_GATEWAY + "/plantilla/getJugadores"
+        response = await fetch(url)
+    }catch( error){
+        alert("Error: No se puede acceder al Api-gateway")
+        console.error(error)
+    }
+    let Jugadores_Curling = null
+    if (response){
+        Jugadores_Curling = await response.json()
+        callbackFn(Jugadores_Curling.data)
+    }
+}
+
+/**
+ * @brief añadir los nombres de la plantilla que se han obtenido desde la funcion nombres_jugadores
+ */
+Plantilla.listarNombresCurling = function(){
+    Plantilla.recupera(Plantilla.Nombres_Jugadores);
 }
 
 

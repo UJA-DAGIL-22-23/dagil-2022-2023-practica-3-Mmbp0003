@@ -33,6 +33,15 @@ router.get("/acercade", async (req, res) => {
     }
 });
 
+router.get("/getJugadores", async (req,res)=>{
+    try{
+        await callbacks.getJugadores(req,res)
+    }catch (error){
+        console.log(error);
+    }
+});
+
+
 
 
 /**
