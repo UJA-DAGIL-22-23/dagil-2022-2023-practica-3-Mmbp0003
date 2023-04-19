@@ -22,7 +22,13 @@ Plantilla.plantillaTags = {
     "ID": "### ID ###",
     "NOMBRE_COMPLETO": "### NOMBRE_COMPLETO ###",
     "NOMBRE": "### NOMBRE ###",
-    "APELLIDO": "### APELLIDO ###"
+    "APELLIDO": "### APELLIDO ###",
+    "FECHA_NACIMIENTO": "### FECHA_NACIMIENTO ###",
+    "PARTICIPACION_JUEGOS_OLIMPICOS": "### PARTICIPACION_JUEGOS_OLIMPICOS ###",
+    "EQUIPO": "### EQUIPO ###",
+    "CATEGORIAS_JUGADAS": "### CATEGORIAS_JUGADAS ###",
+    "VICTORIAS": "### VICTORIAS ###",
+    "DERROTAS": "### DERROTAS ###"
 }
 
 
@@ -140,14 +146,8 @@ Plantilla.TablaNombres.pie = `        </tbody>
 </table>
 `;
 
-
-Plantilla.sustituyeTags = function (plantilla, jugador_C) {
-    return plantilla
-        .replace(new RegExp(Plantilla.plantillaTags.NOMBRE  , 'g'), jugador_C.data.nombre_jugador.nombre )
-        .replace(new RegExp(Plantilla.plantillaTags.APELLIDO  , 'g'), jugador_C.data.nombre_jugador.apellido )
-}
 Plantilla.TablaNombres.actualiza = function (curling) {
-    return Plantilla.sustituyeTags(this.CuerpoJugadores, curling)
+    return Plantilla.sustituyeTagsCompletos(this.CuerpoJugadores, curling)
 }
 
 
@@ -189,11 +189,12 @@ Plantilla.listarNombresCurling = function(){
 //-------------------------------
 //Cuarta Historia de Usuario
 
-Plantilla.CabeceraCompleta = function () {
-    return `
+Plantilla.TablaCompleta = {}
+Plantilla.TablaCompleta.CabeceraCompleta =`
     <table>
        <thead>
-           <th>Nombre_Jugador</th>
+           <th>Nombre</th>
+           <th>Apellido</th>
            <th>Fecha_Nacimiento</th>
            <th>Participacion Juegos Olimpicos</th>
            <th>Equipo</th>
@@ -202,45 +203,42 @@ Plantilla.CabeceraCompleta = function () {
            <th>Derrotas</th> 
         </thead>
        <tbody>`;
+Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
+            <tr title="${Plantilla.plantillaTags.ID}">
+                <td>${Plantilla.plantillaTags.NOMBRE}</td>
+                <td>${Plantilla.plantillaTags.APELLIDO}</td>
+                <td>${Plantilla.plantillaTags.FECHA_NACIMIENTO}</td>
+                <td>${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}</td>
+                <td>${Plantilla.plantillaTags.EQUIPO}</td>
+                <td>${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}</td>
+                <td>${Plantilla.plantillaTags.VICTORIAS}</td>
+                <td>${Plantilla.plantillaTags.DERROTAS}</td>
+            </tr>`;
+Plantilla.TablaCompleta.pieC =  `</tbody> </table>`;
+
+Plantilla.sustituyeTagsCompletos = function (plantilla_, jugador_Cu) {
+    return plantilla_
+        .replace(new RegExp(Plantilla.plantillaTags.ID, 'g'), jugador_Cu.ref['@ref'].id)
+        .replace(new RegExp(Plantilla.plantillaTags.NOMBRE  , 'g'), jugador_Cu.data.nombre_jugador.nombre )
+        .replace(new RegExp(Plantilla.plantillaTags.APELLIDO  , 'g'), jugador_Cu.data.nombre_jugador.apellido )
+        .replace(new RegExp(Plantilla.plantillaTags.FECHA_NACIMIENTO, 'g'), jugador_Cu.data.fecha_nacimiento.dia + "/" + jugador_Cu.data.fecha_nacimiento.mes )
+        .replace(new RegExp(Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS, 'g'), jugador_Cu.data.participacion_juegos_olimpicos)
+        .replace(new RegExp(Plantilla.plantillaTags.EQUIPO, 'g'), jugador_Cu.data.equipo)
+        .replace(new RegExp(Plantilla.plantillaTags.CATEGORIAS_JUGADAS, 'g'), jugador_Cu.data.categorias_jugadas)
+        .replace(new RegExp(Plantilla.plantillaTags.VICTORIAS, 'g'), jugador_Cu.data.victorias)
+        .replace(new RegExp(Plantilla.plantillaTags.DERROTAS, 'g'), jugador_Cu.data.derrotas)
+}
+Plantilla.TablaCompleta.actualiza_2 = function (curling) {
+    return Plantilla.sustituyeTagsCompletos(this.CuerpoCompleto, curling)
 }
 
-Plantilla.CuepoCompleto = function (q) {
-    const curling = q.data;
-
-    const Nombre_Jugador = curling.nombre;
-    const Fecha_Nacimiento = curling.fecha_nacimiento;
-    const Participacion = curling.participacion_juegos_olimpicos;
-    const Equipo = curling.equipo;
-    const Categorias = curling.categorias_jugadas;
-    const Victorias = curling.victorias;
-    const Derrotas = curling.derrotas;
-
-    return `<tr title="${curling.ref['@ref'].id}">
-                <td>${Nombre_Jugador}</td>
-                <td>${Fecha_Nacimiento}</td>
-                <td>${Participacion}</td>
-                <td>${Equipo}</td>
-                <td>${Categorias}</td>
-                <td>${Victorias}</td>
-                <td>${Derrotas}</td>
-            </tr>
-            `;
-}
-
-Plantilla.pieTabla = function (){
-    return `</tbody> </table>`;
-}
-
-Plantilla.TablaCompleta = function (vec_4){
-    let x = "";
-    x += Plantilla.CabeceraCompleta();
-    if (vec_4 && Array.isArray(vec_4)) {
-        vec_4.forEach(i => x += Plantilla.CuepoCompleto(i));
-    }
-    x += Plantilla.pieTabla();
-    Frontend.Article.actualizar("Jugadores al completo", x);
+Plantilla.TablaCompletaJugadores = function (vec_4){
+    let x = Plantilla.TablaCompleta.CabeceraCompleta
+    vec_4.forEach(e => x += Plantilla.TablaCompleta.actualiza_2(e))
+    x += Plantilla.TablaCompleta.pieC
+    Frontend.Article.actualizar("Listados de nombres de jugadores de curling" , x)
 }
 
 Plantilla.listadoCompleto = function (){
-    this.recupera(this.TablaCompleta);
+    Plantilla.recupera(Plantilla.TablaCompletaJugadores);
 }
