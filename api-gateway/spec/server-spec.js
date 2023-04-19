@@ -42,5 +42,31 @@ describe('API Gateway: rutas estáticas', () => {
   })
 });
 
+describe('BBDD Curling', () =>{
+    it('Obtenemos todos los nombres de los jugadores', (done)=>{
+        supertest(app)
+            .get('/plantilla/getId/361826166307291341')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .expect(function (res){
+                assert(res.body.hasOwnProperty('data'));
+                assert(res.body.data.hasOwnProperty('nombre'));
+                assert(res.body.data.nombre == "Sergio");
+            })
+            .end((error) => { error ? done.fail(error) : done() })
+    });
+
+    it ('Todas las personas deben tener diez objetos en el campo', (done)=>{
+        supertest(app)
+            .get('/plantilla/getJugadores')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .expect(function (res){
+                assert(res.body.hasOwnProperty('data'));
+                assert(res.body.data.length == 10);
+            })
+            .end((error) => {error ? done.fail(error):error})
+    });
+});
 
 

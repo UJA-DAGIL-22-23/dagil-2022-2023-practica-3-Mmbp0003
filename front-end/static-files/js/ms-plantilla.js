@@ -18,23 +18,14 @@ Plantilla.datosDescargadosNulos = {
     fecha: ""
 }
 
-Plantilla.jugadoresCurling = {
-    id: "undefined",
-    nombre_jugador: "undefined",
-    fecha_nacimiento: "undefined",
-    participacion_juegos_olimpicos: "undefined",
-    equipo: "undefined",
-    categorias_jugadas: "undefined",
-    victorias: "undefined",
-    derrotas: "undefined"
+Plantilla.plantillaTags = {
+    "ID": "### ID ###",
+    "NOMBRE_COMPLETO": "### NOMBRE_COMPLETO ###",
+    "NOMBRE": "### NOMBRE ###",
+    "APELLIDO": "### APELLIDO ###"
 }
 
 
-/**
- * Función que descarga la info MS Plantilla al llamar a una de sus rutas
- * @param {string} ruta Ruta a descargar
- * @param {función} callBackFn Función a la que se llamará una vez recibidos los datos.
- */
 Plantilla.descargarRuta = async function (ruta, callBackFn) {
     let response = null
 
@@ -58,6 +49,7 @@ Plantilla.descargarRuta = async function (ruta, callBackFn) {
 }
 
 
+
 /**
  * Función principal para mostrar los datos enviados por la ruta "home" de MS Plantilla
  */
@@ -65,7 +57,7 @@ Plantilla.mostrarHome = function (datosDescargados) {
     // Si no se ha proporcionado valor para datosDescargados
     datosDescargados = datosDescargados || this.datosDescargadosNulos
 
-    // Si datos descargados NO es un objeto 
+    // Si datos descargados NO es un objeto
     if (typeof datosDescargados !== "object") datosDescargados = this.datosDescargadosNulos
 
     // Si datos descargados NO contiene el campo mensaje
@@ -74,6 +66,7 @@ Plantilla.mostrarHome = function (datosDescargados) {
     Frontend.Article.actualizar("Plantilla Home", datosDescargados.mensaje)
 }
 
+
 /**
  * Función principal para mostrar los datos enviados por la ruta "acerca de" de MS Plantilla
  */
@@ -81,7 +74,7 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
     // Si no se ha proporcionado valor para datosDescargados
     datosDescargados = datosDescargados || this.datosDescargadosNulos
 
-    // Si datos descargados NO es un objeto 
+    // Si datos descargados NO es un objeto
     if (typeof datosDescargados !== "object") datosDescargados = this.datosDescargadosNulos
 
     // Si datos descargados NO contiene los campos mensaje, autor, o email
@@ -102,6 +95,7 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
     `;
     Frontend.Article.actualizar("Plantilla Acerca de", mensajeAMostrar)
 }
+
 
 
 /**
@@ -130,64 +124,123 @@ Plantilla.procesarAcercaDe = function () {
  * @constructor creamos la tabla que veremos en la pagina
  */
 Plantilla.TablaNombres = {}
-Plantilla.CabeceraJugadores = function() {
-    return `<table> 
-        <thead>
-            <th>Nombre</th>                                    
+Plantilla.TablaNombres.CabeceraJugadores =
+     `<table> 
+        <thead>           
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>                                  
         </thead>
-        `
+            <tbody>`;
+Plantilla.TablaNombres.CuerpoJugadores = `<tbody>
+            <tr title="${Plantilla.plantillaTags.ID}">
+                <td>${Plantilla.plantillaTags.NOMBRE}</td>
+                <td>${Plantilla.plantillaTags.APELLIDO}</td>
+            </tr>`;
+Plantilla.TablaNombres.pie = `        </tbody>
+</table>
+`;
+
+
+Plantilla.sustituyeTags = function (plantilla, jugador_C) {
+    return plantilla
+        .replace(new RegExp(Plantilla.plantillaTags.NOMBRE  , 'g'), jugador_C.data.nombre_jugador.nombre )
+        .replace(new RegExp(Plantilla.plantillaTags.APELLIDO  , 'g'), jugador_C.data.nombre_jugador.apellido )
+}
+Plantilla.TablaNombres.actualiza = function (curling) {
+    return Plantilla.sustituyeTags(this.CuerpoJugadores, curling)
 }
 
-Plantilla.CuerpoJugadores = function (_curling) {
-    const curling = _curling.data
-    return `<tbody>
-            <tr title="Cuerpo Jugadores">
-                <td>${curling.nombre_jugador}</td>
-            </tr>
-            </tbody>
-            </table>`;
-}
 
-/**
- * En esta función solo se mostrara los nombres de los jugadores de nuestra base de datos
- */
 
-Plantilla.Nombres_Jugadores = function (vector){
-    let x = "";
-     x += Plantilla.CabeceraNombre
-    //Miramos que lo que se esta pasando por entrada es una funcion
-    //Añadimos el contenido del cuerpo
-     vector.forEach(e => x += Plantilla.CuerpoJugadores(e))
-     Frontend.Article.actualizar("Son los nombres de los jugadores del deporte Curling",x)
-}
-
-/**
- * @param Recupera los datos de jugadores de la plantilla creada
- * @param callbackFn
- * @returns {Promise<void>}
- */
-Plantilla.recupera = async function (callbackFn){
+Plantilla.recupera = async function (callBackFn) {
     let response = null
-    try{
-        const url = Frontend.API_GATEWAY + "/plantilla/getJugadores"
+
+    // Intento conectar el microservicio Plantilla
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
         response = await fetch(url)
-    }catch( error){
-        alert("Error: No se puede acceder al Api-gateway")
+
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
         console.error(error)
     }
-    let Jugadores_Curling = null
-    if (response){
-        Jugadores_Curling = await response.json()
-        callbackFn(Jugadores_Curling.data)
+
+    //mostrar todos los jinetes que se han descargado
+    let vector = null
+    if (response) {
+        vector = await response.json()
+        callBackFn(vector.data)
     }
 }
 
-/**
- * @brief añadir los nombres de la plantilla que se han obtenido desde la funcion nombres_jugadores
- */
+Plantilla.Nombres_Jugadores = function (vector){
+    let msj = Plantilla.TablaNombres.CabeceraJugadores
+    vector.forEach(e => msj += Plantilla.TablaNombres.actualiza(e))
+    msj += Plantilla.TablaNombres.pie
+
+    // Borrar toda la información de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizar("Listados de nombres de jugadores de curling" , msj)
+}
+
 Plantilla.listarNombresCurling = function(){
     Plantilla.recupera(Plantilla.Nombres_Jugadores);
 }
 
+//-------------------------------
+//Cuarta Historia de Usuario
 
+Plantilla.CabeceraCompleta = function () {
+    return `
+    <table>
+       <thead>
+           <th>Nombre_Jugador</th>
+           <th>Fecha_Nacimiento</th>
+           <th>Participacion Juegos Olimpicos</th>
+           <th>Equipo</th>
+           <th>Categorias Jugadas</th>
+           <th>Victorias</th>
+           <th>Derrotas</th> 
+        </thead>
+       <tbody>`;
+}
 
+Plantilla.CuepoCompleto = function (q) {
+    const curling = q.data;
+
+    const Nombre_Jugador = curling.nombre;
+    const Fecha_Nacimiento = curling.fecha_nacimiento;
+    const Participacion = curling.participacion_juegos_olimpicos;
+    const Equipo = curling.equipo;
+    const Categorias = curling.categorias_jugadas;
+    const Victorias = curling.victorias;
+    const Derrotas = curling.derrotas;
+
+    return `<tr title="${curling.ref['@ref'].id}">
+                <td>${Nombre_Jugador}</td>
+                <td>${Fecha_Nacimiento}</td>
+                <td>${Participacion}</td>
+                <td>${Equipo}</td>
+                <td>${Categorias}</td>
+                <td>${Victorias}</td>
+                <td>${Derrotas}</td>
+            </tr>
+            `;
+}
+
+Plantilla.pieTabla = function (){
+    return `</tbody> </table>`;
+}
+
+Plantilla.TablaCompleta = function (vec_4){
+    let x = "";
+    x += Plantilla.CabeceraCompleta();
+    if (vec_4 && Array.isArray(vec_4)) {
+        vec_4.forEach(i => x += Plantilla.CuepoCompleto(i));
+    }
+    x += Plantilla.pieTabla();
+    Frontend.Article.actualizar("Jugadores al completo", x);
+}
+
+Plantilla.listadoCompleto = function (){
+    this.recupera(this.TablaCompleta);
+}

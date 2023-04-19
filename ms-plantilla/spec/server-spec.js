@@ -56,14 +56,35 @@ describe('Servidor PLANTILLA:', () => {
         .expect('Content-Type', /json/)
         .expect(function (res) {
           //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.data[0].data.hasOwnProperty('¿¿¿ PROPIEDAD ???'));
-          assert(res.body.data[0].data.nombre === "¿¿¿ VALOR ESPERADO ???");
+          assert(res.body.data[0].data.hasOwnProperty('nombre'));
+          assert(res.body.data[0].data.nombre_jugadores.nombre === "Sergio");
 
         })
         .end((error) => { error ? done.fail(error) : done(); }
         );
     });
+      it('Obtenemos todos los nombres de los jugadores ', (done)=>{
+          supertest(app)
+              .get('getId/361826166307291341')
+              .expect(200)
+              .expect('Content-Type', /json/)
+              .expect(function (res){
+                  assert(res.body.data.hasOwnProperty('nombre'));
+                  assert(res.body.data.nombre == "Sergio");
+              })
+              .end((error) => { error ? done.fail(error) : done() })
+      });
 
+      it ('Todas las personas deben tener diez objetos ', (done)=>{
+          supertest(app)
+              .get('/getJugadores')
+              .expect(200)
+              .expect('Content-Type', /json/)
+              .expect(function (res){
+                  assert(res.body.data.length == 10);
+              })
+              .end((error) => {error ? done.fail(error):error})
+      });
   })
 });
 

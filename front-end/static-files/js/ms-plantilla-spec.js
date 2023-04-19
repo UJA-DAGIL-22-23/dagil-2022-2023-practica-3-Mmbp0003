@@ -12,6 +12,8 @@ const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TIT
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
+const IMPRIME_NOMBRE_JUGADORES = "Plantilla donde se listan los nombres de los jugadores"
+const VACIO = " "
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -123,7 +125,18 @@ describe("Plantilla.mostrarAcercaDe: ", function () {
         })
 })
 
+describe ("Plantilla.NombreJugadores", function () {
+    it ("Muestra datos nulos cuando se introudicen datos nulos", function () {
+        //Plantilla.Nombres_Jugadores();
+        //expect(elementoTitulo.innerHTML).toBe(IMPRIME_NOMBRE_JUGADORES);
+        //expect(elementoContenido.querySelector('tbody').innerHTML).toBe(VACIO);
+    })
 
+    it("Muestro los datos nulos cuando le pasa un valor que no es un objeto ", function (){
+        //Plantilla.Nombres_Jugadores(10);
+        //expect(elementoContenido.innerHTML).toBe(IMPRIME_NOMBRE_JUGADORES);
+    })
+})
 /*
 IMPORTANTE
 ==========

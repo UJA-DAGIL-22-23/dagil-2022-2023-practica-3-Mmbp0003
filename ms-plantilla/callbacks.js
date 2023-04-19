@@ -14,7 +14,7 @@ const faunadb = require('faunadb'),
     q = faunadb.query;
 
 const client = new faunadb.Client({
-    secret: 'fnAFBcoDRRAAzULlXEizIA0AT4iya81kHKLXM0Uy',
+    secret: 'fnAFB6GE0mAAzLXNj2vH-IeBT3BxL4qHgd7i222d',
 });
 
 const COLLECTION = "Curling"
@@ -60,21 +60,35 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getJugadores: async (req,res) => {
+    getTodos: async (req, res) => {
         try {
-            let jugadores = await client.query (
-                q.Map(
-                    q.Paginate(q.Documents(q.Collections(COLLECTION))),
-                    q.Lambda("X", q.Get(q.Var("x")))
+            let jinetes = await client.query (
+                q.Map (
+                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
+                    q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
+
             CORS(res)
                 .status(200)
-                .json(jugadores)({})
-        }catch(error){
-            CORS(res).status(500).json({error: error.description })
-        }
+                .json(jinetes)({
 
+                })
+        } catch (error) {
+            CORS(res).status(500).json({ error: error.description })
+        }
+    },
+    getId: async (req, res)=> {
+        try {
+            let jugadores = await client.query
+            {
+                q.Get(q.Ref(q.Collection('Curling'), req.params.id))
+            }
+            CORS(res)
+                .status(200).json(jugadores)
+        }catch(error){
+            CORD(res).status(500).json({error: error.description})
+        }
     }
 }
 

@@ -33,14 +33,21 @@ router.get("/acercade", async (req, res) => {
     }
 });
 
-router.get("/getJugadores", async (req,res)=>{
+router.get("/getTodos", async (req,res)=>{
     try{
-        await callbacks.getJugadores(req,res)
+        await callbacks.getTodos(req,res)
     }catch (error){
         console.log(error);
     }
 });
 
+router.get("/getId", async(req, res)=>{
+    try{
+        await callbacks.getId(req,res)
+    }catch(error){
+        console.log(error);
+    }
+})
 
 
 
