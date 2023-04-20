@@ -171,7 +171,6 @@ Plantilla.recupera = async function (callBackFn) {
         console.error(error)
     }
 
-    //mostrar todos los jinetes que se han descargado
     let vector = null
     if (response) {
         vector = await response.json()
@@ -257,4 +256,41 @@ Plantilla.TablaCompletaJugadores = function (vec_4){
 
 Plantilla.listadoCompleto = function (){
     Plantilla.recupera(Plantilla.TablaCompletaJugadores);
+}
+
+//-------------------------------------------------
+//---------Historia de usuario 3-------------------
+
+
+Plantilla.Ordenamos_Nombres = async function (callbackFn){
+    let response = null;
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
+        response = await fetch(url)
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+
+    let nombre_Curling = null;
+    if (response){
+        nombre_Curling = await response.json()
+        nombre_Curling.data.sort((a,b)=>{
+            //Devuelve -1 si el a esta despues del b
+            if (a.data.nombre_jugador.nombre < b.data.nombre_jugador.nombre){
+                return -1;
+            }
+            //Devuelve 1 si el a esta antes que el b
+            if (a.data.nombre_jugador.nombre > b.data.nombre_jugador.nombre){
+                return 1;
+            }
+            //Devuelve 0 si son iguales
+            return 0;
+        });
+    callbackFn(nombre_Curling.data)
+    }
+}
+
+Plantilla.listaOrdenada = function(){
+    Plantilla.Ordenamos_Nombres(Plantilla.Nombres_Jugadores);
 }
