@@ -16,8 +16,8 @@ const TITULO_ACERCA_DE = "Plantilla Acerca de"
 const TITULO_NOMBRE_JUGADORES= "Listados de nombres de jugadores de curling"
 const OBJETO_NULO = '        '
 
-const TITULO_IMPRIME_NOMBRES_JUGADORES = "Plantilla con una longitud de 10 jugadores"
-const IMPRIME_DATOS_JUGADORES = "Plantilla que nos listan todos los datos de los jugadores"
+const TITULO_JUGADORES_COMPLETOS = "Listado completo de los jugadores de curling"
+const OBJETO_COMPLETO_VACIO = ''
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -141,6 +141,21 @@ describe("Plantilla.Nombres_Jugadores", function () {
             Plantilla.Nombres_Jugadores(10)
             expect(elementoTitulo.innerHTML).toBe(TITULO_NOMBRE_JUGADORES)
             expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_NULO)
+        })
+});
+
+describe("Plantilla.TablaCompletaJugadores", function () {
+    it ("Mostrar datos nulos cuando le pasamos vector nulo",
+        function () {
+            Plantilla.TablaCompletaJugadores([])
+            expect(elementoTitulo.innerHTML).toBe(TITULO_JUGADORES_COMPLETOS)
+            expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_COMPLETO_VACIO)
+        })
+    it ("Mostraremos el vector cuando se le pasa un objeto erroneo",
+        function () {
+            Plantilla.TablaCompletaJugadores(10)
+            expect(elementoTitulo.innerHTML).toBe(TITULO_JUGADORES_COMPLETOS)
+            expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_COMPLETO_VACIO)
         })
 });
 /*

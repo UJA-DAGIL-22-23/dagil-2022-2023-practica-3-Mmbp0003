@@ -242,11 +242,17 @@ Plantilla.TablaCompleta.actualiza_2 = function (curling) {
     return Plantilla.sustituyeTagsCompletos(this.CuerpoCompleto, curling)
 }
 
+/***
+ * @param vec_4
+ * @constructor
+ */
 Plantilla.TablaCompletaJugadores = function (vec_4){
     let x = Plantilla.TablaCompleta.CabeceraCompleta
-    vec_4.forEach(e => x += Plantilla.TablaCompleta.actualiza_2(e))
+    if (vec_4 && Array.isArray(vec_4)){
+         vec_4.forEach(e => x += Plantilla.TablaCompleta.actualiza_2(e))
+    }
     x += Plantilla.TablaCompleta.pieC
-    Frontend.Article.actualizar("Listados de nombres de jugadores de curling" , x)
+    Frontend.Article.actualizar("Listado completo de los jugadores de curling" , x)
 }
 
 Plantilla.listadoCompleto = function (){
