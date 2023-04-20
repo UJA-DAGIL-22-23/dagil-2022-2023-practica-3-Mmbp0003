@@ -249,3 +249,111 @@ cuando se muestras valores que no son un objeto y cuando se le pasa un valor nul
 
 ##Segunda Historia de Usuario
 
+En la segunda historia de usuario se nos pide poder ver un listado con los nombres de los jugadores que se han incluido
+en la base de datos de Fauna. Para ellos he tenido que modificar las siguientes clases:
+
+ > ms-plantilla.js 
+ 
+Dentro de esta clase hemos introducido las siguiente clases
+
+```
+ TablaNombres.CabeceraJugadores
+ TablaNombres.CuerpoJugadores
+ TablaNombres.pie
+```
+
+Estas funciones son las que generan la tabla donde veremos listados los nombres de todos los jugadores introducidos en 
+nuestra base de datos
+
+```
+    Plantilla.recupera
+```
+
+Es la función que recupera los parámetros del nombre y apellidos de los jugadores de la base de datos y los devuelve con 
+callBackFn
+
+```
+    Plantilla.listarNombresCurling
+```
+Es la función a la que llama desde el index, para que se listen desde los jugadores por pantalla con la función recupera 
+y Nombres_Jugadores
+
+```
+    Plantilla.Nombres_Jugadores
+    Plantilla.SustituyeTags
+    Plantilla.actualiza
+```
+Se une la tabla que hemos creado y se introducen en ella los parámetros sustituyendo y actualizando los tags del nombre 
+y apellido
+Por otra parte también hemos cambiado las clases de:
+
+```
+    ms-plantilla\routers.js
+    ms-plantilla\callback.js
+```
+Las clases que se han añadido en los callbacks son:
+```
+    getTodos
+    getId 
+```
+Las clases que se han añadido a la clase routers son:
+```
+    router.get("/getTodos")
+    router.get("/getId")
+```
+
+Por otra parte hemos creado los TDD de la clase de NombresJugadores en la clase "ms-plantilla-spec.js" donde hemos hecho 
+dos pruebas:
+
+- Una donde se muestran los datos del vector nulo
+- La segunda muestra los datos nulos cuando el objeto que se le pasa no es el correcto
+
+![Captura de la segunda HU en Trello](./assets/img/HU_2.1.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/HU_2.2.PNG)
+*Trello al acabar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/T_2.PNG)
+
+
+##CUARTA HISTORIA DE USUARIO
+
+En esta historia de usuario se nos pide un listado donde aparezca en esta ocasión todos los datos de los jugadores de la 
+base de datos que hemos creado y se vean en una tabla, al ser muy parecido a la anterior historia de usuario, voy a dar 
+menos detalle sobre esta.
+
+Las clases que hemos introducido son
+
+```
+    ms-plantilaa
+         > TablaCompleta
+         > TablaCompleta.CabeceraCompleta
+         > TablaCompleta.CuerpoCompleto
+         > TablaCompleta.PieC
+         
+         > Plantilla.sustituyeTagsCompletos
+         > Plantilla.TablaCompleta.actualiza_2
+         > Plantilla.TablaCompletaJugadores
+         
+         > Plantilla.listadoCompleto
+```
+
+Viendo estas clases, las funcionalidad son las mismas en la historia de usuario pasada; mientras que, los test de esta 
+también serás los mismos que en la anterior.
+
+![Captura de la segunda HU en Trello](./assets/img/HU_4.1.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/HU_4.2.PNG)
+*Trello al acabar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/T_3.PNG)
+
+#PRIMERA ITERACIÓN
+
+![Captura de la segunda HU en Trello](./assets/img/HU_1.PNG)
+*Trello al comienzo de la iteración 1.* &#8593;
+![Captura de la segunda HU en Trello](./assets/img/HU_4.2.PNG)
+*Trello al finalizar la iteración 1 .* &#8593;
+
