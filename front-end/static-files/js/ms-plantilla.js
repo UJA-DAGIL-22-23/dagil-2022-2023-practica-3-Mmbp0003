@@ -131,7 +131,7 @@ Plantilla.procesarAcercaDe = function () {
  */
 Plantilla.TablaNombres = {}
 Plantilla.TablaNombres.CabeceraJugadores =
-     `<table> 
+     `<table width="100%" class="Estilo_Nombres"> 
         <thead>           
             <th>NOMBRE</th>
             <th>APELLIDO</th>                                  
@@ -201,7 +201,7 @@ Plantilla.listarNombresCurling = function(){
 
 Plantilla.TablaCompleta = {}
 Plantilla.TablaCompleta.CabeceraCompleta =`
-    <table>
+    <table class ="Estilo_Completo">
        <thead>
            <th>Nombre</th>
            <th>Apellido</th>
