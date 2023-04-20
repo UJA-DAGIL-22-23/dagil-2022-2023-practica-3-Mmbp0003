@@ -137,7 +137,7 @@ Plantilla.TablaNombres.CabeceraJugadores =
             <th>APELLIDO</th>                                  
         </thead>
             <tbody>`;
-Plantilla.TablaNombres.CuerpoJugadores = `<tbody>
+Plantilla.TablaNombres.CuerpoJugadores = `
             <tr title="${Plantilla.plantillaTags.ID}">
                 <td>${Plantilla.plantillaTags.NOMBRE}</td>
                 <td>${Plantilla.plantillaTags.APELLIDO}</td>
@@ -146,8 +146,14 @@ Plantilla.TablaNombres.pie = `        </tbody>
 </table>
 `;
 
+Plantilla.sustituyeTags = function (plantilla_, jugador_Cu) {
+    return plantilla_
+        .replace(new RegExp(Plantilla.plantillaTags.ID, 'g'), jugador_Cu.ref['@ref'].id)
+        .replace(new RegExp(Plantilla.plantillaTags.NOMBRE, 'g'), jugador_Cu.data.nombre_jugador.nombre)
+        .replace(new RegExp(Plantilla.plantillaTags.APELLIDO, 'g'), jugador_Cu.data.nombre_jugador.apellido)
+}
 Plantilla.TablaNombres.actualiza = function (curling) {
-    return Plantilla.sustituyeTagsCompletos(this.CuerpoJugadores, curling)
+    return Plantilla.sustituyeTags(this.CuerpoJugadores, curling)
 }
 
 
@@ -173,12 +179,16 @@ Plantilla.recupera = async function (callBackFn) {
     }
 }
 
+/***
+ * @param vector
+ * @constructor
+ */
 Plantilla.Nombres_Jugadores = function (vector){
     let msj = Plantilla.TablaNombres.CabeceraJugadores
-    vector.forEach(e => msj += Plantilla.TablaNombres.actualiza(e))
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.TablaNombres.actualiza(e))
+    }
     msj += Plantilla.TablaNombres.pie
-
-    // Borrar toda la información de Article y la sustituyo por la que me interesa
     Frontend.Article.actualizar("Listados de nombres de jugadores de curling" , msj)
 }
 

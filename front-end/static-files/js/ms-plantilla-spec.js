@@ -12,8 +12,12 @@ const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TIT
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
-const IMPRIME_NOMBRE_JUGADORES = "Plantilla donde se listan los nombres de los jugadores"
-const VACIO = " "
+
+const TITULO_NOMBRE_JUGADORES= "Listados de nombres de jugadores de curling"
+const OBJETO_NULO = '        '
+
+const TITULO_IMPRIME_NOMBRES_JUGADORES = "Plantilla con una longitud de 10 jugadores"
+const IMPRIME_DATOS_JUGADORES = "Plantilla que nos listan todos los datos de los jugadores"
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -125,18 +129,20 @@ describe("Plantilla.mostrarAcercaDe: ", function () {
         })
 })
 
-describe ("Plantilla.NombreJugadores", function () {
-    it ("Muestra datos nulos cuando se introudicen datos nulos", function () {
-        //Plantilla.Nombres_Jugadores();
-        //expect(elementoTitulo.innerHTML).toBe(IMPRIME_NOMBRE_JUGADORES);
-        //expect(elementoContenido.querySelector('tbody').innerHTML).toBe(VACIO);
-    })
-
-    it("Muestro los datos nulos cuando le pasa un valor que no es un objeto ", function (){
-        //Plantilla.Nombres_Jugadores(10);
-        //expect(elementoContenido.innerHTML).toBe(IMPRIME_NOMBRE_JUGADORES);
-    })
-})
+describe("Plantilla.Nombres_Jugadores", function () {
+    it ("Mostrar datos nulos cuando le pasamos vector nulo",
+        function () {
+            Plantilla.Nombres_Jugadores([])
+            expect(elementoTitulo.innerHTML).toBe(TITULO_NOMBRE_JUGADORES)
+            expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_NULO)
+        })
+    it("Mostraremos un vector cuando se le pasan un objeto erroneo a su longitud total",
+        function () {
+            Plantilla.Nombres_Jugadores(10)
+            expect(elementoTitulo.innerHTML).toBe(TITULO_NOMBRE_JUGADORES)
+            expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_NULO)
+        })
+});
 /*
 IMPORTANTE
 ==========

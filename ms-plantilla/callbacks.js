@@ -62,16 +62,14 @@ const CB_MODEL_SELECTS = {
     },
     getTodos: async (req, res) => {
         try {
-            let jinetes = await client.query (
+            let personas = await client.query (
                 q.Map (
                     q.Paginate(q.Documents(q.Collection(COLLECTION))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
 
-            CORS(res)
-                .status(200)
-                .json(jinetes)({
+            CORS(res).status(200).json(personas)({
 
                 })
         } catch (error) {
@@ -87,9 +85,9 @@ const CB_MODEL_SELECTS = {
             CORS(res)
                 .status(200).json(jugadores)
         }catch(error){
-            CORD(res).status(500).json({error: error.description})
+            CORS(res).status(500).json({error: error.description})
         }
-    }
+    },
 }
 
 
