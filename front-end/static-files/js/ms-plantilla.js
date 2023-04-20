@@ -294,3 +294,81 @@ Plantilla.Ordenamos_Nombres = async function (callbackFn){
 Plantilla.listaOrdenada = function(){
     Plantilla.Ordenamos_Nombres(Plantilla.Nombres_Jugadores);
 }
+
+//----------------------------------------------------------
+//-------------HISTORIA DE USUARIO 5------------------------
+
+Plantilla.Ordena = async function (callbackFn, preferencia) {
+    let response = null;
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
+        response = await fetch(url)
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+
+    let vector_objetos = null;
+    if (response) {
+        vector_objetos = await response.json()
+        if (preferencia == 'nombre') {
+            vector_objetos.data.sort((a, b) => {
+                if (a.data.nombre_jugador.nombre < b.data.nombre_jugador.nombre) {
+                    return -1;
+                }
+                if (a.data.nombre_jugador.nombre > b.data.nombre_jugador.nombre) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+        if (preferencia == 'apellido'){
+            vector_objetos.data.sort((a, b) => {
+                if (a.data.nombre_jugador.apellido < b.data.nombre_jugador.apellido) {
+                    return -1;
+                }
+                if (a.data.nombre_jugador.apellido > b.data.nombre_jugador.apellido) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+        if (preferencia == 'fecha_nacimiento'){
+            vector_objetos.data.sort((a, b) => {
+                if (a.data.fecha_nacimiento.dia != b.data.fecha_nacimiento.dia){
+                    return a.data.fecha_nacimiento.dia - b.data.fecha_nacimiento.dia;
+                } if (a.data.fecha_nacimiento.dia == b.data.fecha_nacimiento.dia){
+                    if (a.data.fecha_nacimiento.mes != b.data.fecha_nacimiento.mes){
+                        return a.data.fecha_nacimiento.mes - b.data.fecha_nacimiento.mes;
+                    }
+                }
+            });
+        }
+        if (preferencia == 'categorias_jugadas'){
+            vector_objetos.data.sort((a, b) => {
+                if (a.data.categorias_jugadas < b.data.categorias_jugadas) {
+                    return -1;
+                }
+                if (a.data.categorias_jugadas> b.data.categorias_jugadas) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+        if (preferencia == 'victorias'){
+            vector_objetos.data.sort((a, b) => {
+                return a.data.victorias - b.data.victorias;
+            });
+        }
+        if (preferencia == 'derrotas'){
+            vector_objetos.data.sort((a, b) => {
+                return a.data.derrotas - b.data.derrotas;
+            });
+        }
+        callbackFn(vector_objetos.data)
+    }
+}
+
+Plantilla.listaOrdenadaC = function(preferencia){
+    Plantilla.Ordena(Plantilla.TablaCompletaJugadores, preferencia);
+}
