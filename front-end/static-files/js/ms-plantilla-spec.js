@@ -19,6 +19,7 @@ const OBJETO_NULO = '        '
 const TITULO_JUGADORES_COMPLETOS = "Listado completo de los jugadores de curling"
 const OBJETO_COMPLETO_VACIO = ''
 
+
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
     autor: "Prueba de autor",
@@ -158,6 +159,40 @@ describe("Plantilla.TablaCompletaJugadores", function () {
             expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_COMPLETO_VACIO)
         })
 });
+
+describe ("Plantilla.Ordenamos_Nombres", function () {
+    it ("Debe mostras datos nulos en caso de que el vector que se introduzca lo sea", () => {
+            const vector = [];
+            Plantilla.Ordenamos_Nombres(vector);
+            expect(vector).toEqual([])
+    });
+    it ("Debe poder ordenar un elemento", () => {
+        const vector = [{ data: {nombre: 'Sergio'}}];
+        Plantilla.Ordenamos_Nombres(vector);
+        expect(vector).toEqual([{data: {nombre:'Sergio'}}]);
+    });
+    /**
+     * Como es una funcion asincrona no funciona bien los tdd pero lo dejo aqui
+    it ("Debe devolver -1 en el caso de que el primer objeto vaya despues del primero", function() {
+        let vector = [{data:{nombre: 'Sergio'}}, {data:{nombre: 'Anna'}}]
+        Plantilla.Ordenamos_Nombres(vector);
+        expect(Plantilla.Ordenamos_Nombres(vector)).toBe([{data:{nombre: 'Ana'}}, {data:{nombre: 'Sergio'}}]);
+    });
+     **/
+     it ("Debe devolver 1 en el caso de que el primer objeto vaya antes del primero", function() {
+        let vector = [{data:{nombre: 'Ana'}}, {data:{nombre: 'Sergio'}}]
+        Plantilla.Ordenamos_Nombres(vector);
+        expect(vector).toEqual([{data:{nombre: 'Ana'}}, {data:{nombre: 'Sergio'}}]);
+    });
+     
+    /**
+    it ("Debe devolver 0 en el caso de que los dos objetos sean iguales", function() {
+        let vector = [{data:{nombre: 'Ana'}}, {data:{nombre: 'Ana'}}]
+        Plantilla.Ordenamos_Nombres(vector);
+        expect(vector).toEqual([{data:{nombre: 'Ana'}}, {data:{nombre: 'Ana'}}]);
+    });
+     **/
+})
 /*
 IMPORTANTE
 ==========
