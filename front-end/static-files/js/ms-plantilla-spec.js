@@ -212,14 +212,14 @@ describe ("Plantilla.Ordena", function () {
      it ("Debe devolver -1 en el caso de que el primer objeto vaya despues del primero", function() {
         const preferencia = 'nombre'
         let vector = [{data:{preferencia: 'Sergio'}}, {data:{preferencia: 'Anna'}}]
-        Plantilla.Ordenamos_Nombres(vector,preferencia);
+        Plantilla.Ordena(vector,preferencia);
         expect(Plantilla.Ordenamos_Nombres(vector)).toBe([{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Sergio'}}]);
     });
      **/
     it ("Debe devolver 1 en el caso de que el primer objeto vaya antes del primero", function() {
         const preferencia = 'nombre'
         let vector = [{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Sergio'}}]
-        Plantilla.Ordenamos_Nombres(vector,preferencia);
+        Plantilla.Ordena(vector,preferencia);
         expect(vector).toEqual([{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Sergio'}}]);
     });
 
@@ -227,7 +227,7 @@ describe ("Plantilla.Ordena", function () {
      it ("Debe devolver 0 en el caso de que los dos objetos sean iguales", function() {
         const preferencia = 'nombre'
         let vector = [{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Ana'}}]
-        Plantilla.Ordenamos_Nombres(vector.preferencia);
+        Plantilla.Ordena(vector.preferencia);
         expect(vector).toEqual([{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Ana'}}]);
     });
      **/
