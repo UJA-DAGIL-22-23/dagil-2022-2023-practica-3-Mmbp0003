@@ -184,7 +184,7 @@ describe ("Plantilla.Ordenamos_Nombres", function () {
         Plantilla.Ordenamos_Nombres(vector);
         expect(vector).toEqual([{data:{nombre: 'Ana'}}, {data:{nombre: 'Sergio'}}]);
     });
-     
+
     /**
     it ("Debe devolver 0 en el caso de que los dos objetos sean iguales", function() {
         let vector = [{data:{nombre: 'Ana'}}, {data:{nombre: 'Ana'}}]
@@ -193,6 +193,47 @@ describe ("Plantilla.Ordenamos_Nombres", function () {
     });
      **/
 })
+
+describe ("Plantilla.Ordena", function () {
+    it ("Debe mostras datos nulos en caso de que el vector sea nulo una preferencia del usuario", () => {
+        const preferencia = 'nombre'
+        const vector = [];
+        Plantilla.Ordena(vector,preferencia);
+        expect(vector).toEqual([])
+    });
+    it ("Debe poder ordenar un elemento de la preferencia deseada (hemos probado con los nombres)", () => {
+        const preferencia = 'nombre'
+        const vector = [{ data: {preferencia: 'Sergio'}}];
+        Plantilla.Ordena(vector.preferencia);
+        expect(vector).toEqual([{data: {preferencia:'Sergio'}}]);
+    });
+    /**
+     * Como es una funcion asincrona no funciona bien los tdd pero lo dejo aqui para que se vea como lo habria documentado
+     it ("Debe devolver -1 en el caso de que el primer objeto vaya despues del primero", function() {
+        const preferencia = 'nombre'
+        let vector = [{data:{preferencia: 'Sergio'}}, {data:{preferencia: 'Anna'}}]
+        Plantilla.Ordenamos_Nombres(vector,preferencia);
+        expect(Plantilla.Ordenamos_Nombres(vector)).toBe([{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Sergio'}}]);
+    });
+     **/
+    it ("Debe devolver 1 en el caso de que el primer objeto vaya antes del primero", function() {
+        const preferencia = 'nombre'
+        let vector = [{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Sergio'}}]
+        Plantilla.Ordenamos_Nombres(vector,preferencia);
+        expect(vector).toEqual([{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Sergio'}}]);
+    });
+
+    /**
+     it ("Debe devolver 0 en el caso de que los dos objetos sean iguales", function() {
+        const preferencia = 'nombre'
+        let vector = [{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Ana'}}]
+        Plantilla.Ordenamos_Nombres(vector.preferencia);
+        expect(vector).toEqual([{data:{preferencia: 'Ana'}}, {data:{preferencia: 'Ana'}}]);
+    });
+     **/
+})
+
+
 /*
 IMPORTANTE
 ==========

@@ -345,7 +345,7 @@ también serás los mismos que en la anterior.
 ![Captura de la segunda HU en Trello](./assets/img/HU_4.1.PNG)
 *Trello al comenzar la HU.* &#8593;
 
-![Captura de la segunda HU en Trello](./assets/img/HU_4.2.PNG)
+![Captura de la segunda HU en Trello](./assets/img/hu_4.2.PNG)
 *Trello al acabar la HU.* &#8593;
 
 ![Captura de la segunda HU en Trello](./assets/img/T_3.PNG)
