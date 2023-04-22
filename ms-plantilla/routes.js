@@ -41,7 +41,7 @@ router.get("/getTodos", async (req,res)=>{
     }
 });
 
-router.get("/getId", async(req, res)=>{
+router.get("/getId/:idJugador", async(req, res)=>{
     try{
         await callbacks.getId(req,res)
     }catch(error){

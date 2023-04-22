@@ -37,3 +37,12 @@ Frontend.Article.actualizar = function (titulo, contenido) {
     document.getElementById( Frontend.ID_SECCION_PRINCIPAL_CONTENIDO ).innerHTML = contenido
     return this;
 }
+
+Frontend.Article.mostrar = function(){
+    let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
+}
+
+Frontend.Article.actualizarBoton = function (titulo, contenido){
+    this.mostrar()
+    return this;
+}

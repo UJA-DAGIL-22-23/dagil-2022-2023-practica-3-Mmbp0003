@@ -78,10 +78,9 @@ const CB_MODEL_SELECTS = {
     },
     getId: async (req, res)=> {
         try {
-            let jugadores = await client.query
-            {
-                q.Get(q.Ref(q.Collection('Curling'), req.params.id))
-            }
+            let jugadores = await client.query(
+                q.Get(q.Ref(q.Collection(COLLECTION), req.params.idJugador))
+            )
             CORS(res)
                 .status(200).json(jugadores)
         }catch(error){

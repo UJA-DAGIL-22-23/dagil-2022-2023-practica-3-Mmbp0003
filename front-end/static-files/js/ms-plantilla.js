@@ -134,13 +134,18 @@ Plantilla.TablaNombres.CabeceraJugadores =
      `<table width="100%" class="Estilo_Nombres"> 
         <thead>           
             <th>NOMBRE</th>
-            <th>APELLIDO</th>                                  
+            <th>APELLIDO</th>   
+            <th>BOTON</th>                               
         </thead>
             <tbody>`;
 Plantilla.TablaNombres.CuerpoJugadores = `
             <tr title="${Plantilla.plantillaTags.ID}">
                 <td>${Plantilla.plantillaTags.NOMBRE}</td>
                 <td>${Plantilla.plantillaTags.APELLIDO}</td>
+                 <td><div><a href="javascript:Plantilla.mostrarUnJugador('${Plantilla.plantillaTags.ID}')"
+                            class="opcion-secundaria mostrar">Mostrar</a>
+                    </div>
+                </td>
             </tr>`;
 Plantilla.TablaNombres.pie = `        </tbody>
 </table>
@@ -371,4 +376,102 @@ Plantilla.Ordena = async function (callbackFn, preferencia) {
 
 Plantilla.listaOrdenadaC = function(preferencia){
     Plantilla.Ordena(Plantilla.TablaCompletaJugadores, preferencia);
+}
+
+//------------------------------------------------------
+//-------------Historia Usuario 6-----------------------
+
+Plantilla.FormularioJugadorCurling = {}
+Plantilla.FormularioJugadorCurling.formulario = `
+    <form method='post' action=''> 
+        <table class="Estilo_Completo">
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha_Nacimiento</th>
+                <th>Participacion Juegos Olimpicos</th>
+                <th>Equipo</th>
+                <th>Categorias Jugadas</th>
+                <th>Victorias</th>
+                <th>Derrotas</th> 
+            </thead> 
+            
+            <tbody>
+                <tr title="${Plantilla.plantillaTags.ID}">
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.ID}" 
+                        name="id_persona"/></td> 
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.NOMBRE}" 
+                        name="id_persona"/></td>   
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.APELLIDO}" 
+                        name="id_persona"/></td>  
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.FECHA_NACIMIENTO}" 
+                        name="id_persona"/></td>  
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}" 
+                        name="id_persona"/></td> 
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.EQUIPO}" 
+                        name="id_persona"/></td>
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}" 
+                        name="id_persona"/></td> 
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.VICTORIAS}" 
+                        name="id_persona"/></td>  
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.DERROTAS}" 
+                        name="id_persona"/></td>   
+                         
+                </tr>
+            </tbody>
+        </table>
+    </form>
+`;
+
+Plantilla.recuperarPorId = async function(idJugador, callbackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getId/" + idJugador
+        const response = await fetch(url);
+        if (response) {
+            const Curling = await response.json()
+            callbackFn(Curling)
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+
+}
+
+Plantilla.FormularioJugadorCurling.actualiza_3 = function (Curling){
+    return Plantilla.sustituyeTagsCompletos((this.formulario, Curling));
+}
+Plantilla.formularioCurling = function (Curling){
+    return Plantilla.FormularioJugadorCurling.actualiza_3(Curling);
+}
+Plantilla.ListaJugadorFormulario = function (vector){
+
+        let msj = Plantilla.formularioCurling(jugador);
+        Frontend.Article.actualizar("Mostrar un jugador de Curling por Formulario", msj)
+        Plantilla.almacenarJugadorCurling(vector)
+
+}
+Plantilla.FormularioJugador = function (Jugador){
+    return Plantilla.FormularioJugadorCurling.actualiza(Jugador);
+}
+Plantilla.almacenarJugadorCurling = function(Curling){
+    Plantilla.JugadorMostrado = Curling;
+}
+Plantilla.mostrarUnJugador = function (idJugador){
+    this.recuperarPorId(idJugador, this.ListaJugadorFormulario);
+}
+Plantilla.jugadorComoTabla = function (jugador) {
+    return Plantilla.TablaNombres.CabeceraJugadores
+        + Plantilla.TablaNombres.actualiza_3(jugador)
+        + Plantilla.TablaNombres.pie;
 }
