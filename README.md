@@ -348,7 +348,7 @@ también serás los mismos que en la anterior.
 ![Captura de la segunda HU en Trello](./assets/img/hu_4.2.PNG)
 *Trello al acabar la HU.* &#8593;
 
-![Captura de la segunda HU en Trello](./assets/img/T_3.PNG)
+![Captura de la segunda HU en Trello](./assets/img/T_4.PNG)
 
 #PRIMERA ITERACIÓN
 
@@ -366,3 +366,79 @@ también serás los mismos que en la anterior.
 ![Captura de la segunda HU en Trello](./assets/img/It_2.2.PNG)
 *Trello al finalizar la iteración 1 .* &#8593;
 
+##TERCERA HISTORIA DE USUARIO
+
+En esta historia de usuario se nos pide que listemos los nombres de los jugadores; pero, en este caso, debemos de hacerlo
+ordenando estos nombres de forma alfabética. Para ello, hemos tenido que agregar dos funciones importantes
+
+``
+Plantilla.OrdenamosNombres = async function (callbackFn)
+``
+
+Esta función nos devuelve la lista de nombres de nuestra base de datos ordenada alfabéticamente de forma adecuada, para ello
+conectamos con la api-gateway para recoger todos los datos y una vez estén, vamos a ordenarlos. Devolviendo 1 en caso de que
+el primer nombre en la lista vaya antes que el segundo; devuelve -1, si el primer nombre va después del segundo
+y nos devolverá cero en el caso de que sean identicos.
+
+``
+Plantilla.listaOrdenada
+``
+
+Es la función a la que llama el index para que se vea por pantalla, los datos de la base de datos ordenados. 
+
+En este caso con los test de esta historia de usuario hemos probado con cinco de ellos; los cuales, no funcionan correctamente
+puesto que la función que he programado es una función asíncrona. 
+
+```
+    > Para cuando el vector es nulo
+    > Cuando solo hay un dato en la lista
+    > Cuando devuelve 1
+    > Cuando devuelve -1
+    > Caundo devuelve 0
+```
+
+![Captura de la segunda HU en Trello](./assets/img/HU_3.1.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/HU3_2.PNG)
+*Trello al acabar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/T_3.PNG)
+
+
+##TERCERA HISTORIA DE CINCO
+
+En esta historia de usuario se nos pide que el usuario pueda elegir que por que campo quiere ver ordenados los datos de 
+la base de datos
+
+```
+Plantilla.Ordena = async function (callbackFn, preferencia) 
+```
+
+Esta función nos devuelve la listada nuestra base de datos ordenada dependiendo de la prefencia que haya seleccionado, para ello
+conectamos con la api-gateway para recoger todos los datos y una vez estén, vamos a ordenarlos. La preferencia funciona al 
+seleccionar el botón te permite seleccionar por cual dato estará ordenado.
+
+``
+Plantilla.listaOrdenadaC = function(preferencia)
+``
+
+Es la función a la que llama el index para que se vea por pantalla, los datos de la base de datos ordenados.
+
+En este caso con los test de esta historia de usuario cinco son los mismos que en la tercera historia de usuario.
+
+```
+    > Para cuando el vector es nulo
+    > Cuando solo hay un dato en la lista
+    > Cuando devuelve 1
+    > Cuando devuelve -1
+    > Caundo devuelve 0
+```
+
+![Captura de la segunda HU en Trello](./assets/img/HU_5.1.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/HU_5.2.PNG)
+*Trello al acabar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/T_5.PNG)
