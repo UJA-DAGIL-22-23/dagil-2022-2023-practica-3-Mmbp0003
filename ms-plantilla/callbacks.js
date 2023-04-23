@@ -76,17 +76,53 @@ const CB_MODEL_SELECTS = {
             CORS(res).status(500).json({ error: error.description })
         }
     },
-    getId: async (req, res)=> {
+    setTodos: async (req, res) => {
         try {
-            let jugadores = await client.query(
-                q.Get(q.Ref(q.Collection(COLLECTION), req.params.idJugador))
+            let valor= {}
+            let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
+            let jugador = await client.query(
+                q.Update(
+                    q.Ref(q.Collection(COLLECTION), data.id_jugador),
+                    {
+                        data: {
+                            nombre: data.nombre_jugador.nombre,
+                            apellido: data.nombre_jugador.apellido,
+                            fecha_nacimiento: data.fecha_nacimiento,
+                            participacion_juegos_olimpicos: data.participacion_juegos_olimpicos,
+                            equipo: data.equipo,
+                            categorias_jugadas: data.categorias_jugadas,
+                            victorias: data.victorias,
+                            derrotas: data.derrotas
+                        },
+                    },
+                )
             )
-            CORS(res)
-                .status(200).json(jugadores)
-        }catch(error){
-            CORS(res).status(500).json({error: error.description})
+                .then((ret) => {
+                    valor = ret
+                    CORS(res).status(200).header( 'Content-Type', 'application/json' ).json(valor)
+                })
+
+        } catch (error) {
+            CORS(res).status(500).json({ error: error.description })
         }
     },
+    getPorId: async (req, res) => {
+        try {
+            // console.log( "getPorId req", req.params.idPersona ) // req.params contiene todos los parámetros de la llamada
+            let jugador = await client.query(
+                q.Get(q.Ref(q.Collection(COLLECTION), req.params.idJinete))
+            )
+
+            CORS(res)
+                .status(200)
+                .json(jugador)
+
+        } catch (error) {
+            CORS(res).status(500).json({ error: error.description })
+        }
+    },
+
+
 }
 
 

@@ -41,13 +41,23 @@ router.get("/getTodos", async (req,res)=>{
     }
 });
 
-router.get("/getId/:idJugador", async(req, res)=>{
+router.post("/setTodos", async (req,res)=>{
     try{
-        await callbacks.getId(req,res)
-    }catch(error){
+        await callbacks.setTodos(req,res)
+    }catch (error){
         console.log(error);
     }
-})
+});
+
+router.get("/getPorId/:idJinete", async (req, res) => {
+    try {
+        await callbacks.getPorId(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
 
 
 

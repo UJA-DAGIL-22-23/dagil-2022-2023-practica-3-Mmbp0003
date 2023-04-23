@@ -354,6 +354,15 @@ también serás los mismos que en la anterior.
 
 ![Captura de la segunda HU en Trello](./assets/img/HU_1.PNG)
 *Trello al comienzo de la iteración 1.* &#8593;
+
 ![Captura de la segunda HU en Trello](./assets/img/HU_4.2.PNG)
+*Trello al finalizar la iteración 1 .* &#8593;
+
+#SEGUNDA ITERACIÓN
+
+![Captura de la segunda HU en Trello](./assets/img/In_2.PNG)
+*Trello al comienzo de la iteración 1.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/It_2.2.PNG)
 *Trello al finalizar la iteración 1 .* &#8593;
 

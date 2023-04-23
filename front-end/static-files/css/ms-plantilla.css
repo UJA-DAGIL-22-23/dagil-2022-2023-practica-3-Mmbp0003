@@ -33,3 +33,29 @@ table.Estilo_Completo thead th{
     background-color: #9999FF;
     height: 2em;
 }
+
+.opcion-principal,
+.opcion-secundaria,
+.opcion-terciaria {
+    border: 2px solid rgba(100, 100, 100, 0.2);
+    border-radius: .4em 0 .2em 0;
+    padding: .2em;
+    color: inherit;
+}
+
+.opcion-principal:hover,
+.opcion-secundaria:hover,
+.opcion-secundaria:hover  {
+    background-color: rgba(100, 100, 100, 0.2);
+}
+
+.opcion-principal {
+    margin: 0 .1em 0 .1em;
+}
+.opcion-secundaria,
+.opcion-terciaria {
+    max-width: 5em;
+    min-width: 5em;
+    margin: 0.2em auto 0.2em auto;
+}
+

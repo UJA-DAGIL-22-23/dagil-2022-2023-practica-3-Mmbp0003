@@ -42,7 +42,24 @@ Frontend.Article.mostrar = function(){
     let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
 }
 
-Frontend.Article.actualizarBoton = function (titulo, contenido){
-    this.mostrar()
-    return this;
-}
+ Frontend.Article.borrarTitulo = function () {
+     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = "";
+     return this;
+ }
+ Frontend.Article.borrarContenido = function () {
+     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML = "";
+     return this;
+ }
+ Frontend.Article.borrar = function () {
+     return this.borrarTitulo().borrarContenido();
+ }
+ Frontend.Article.aniadirTitulo = function (texto) {
+     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML += "\n" + texto;
+     return this;
+ }
+ Frontend.Article.actualizarBoton = function (titulo, contenido) {
+     this.borrar()
+         .aniadirTitulo(titulo)
+        return this;
+
+    }
