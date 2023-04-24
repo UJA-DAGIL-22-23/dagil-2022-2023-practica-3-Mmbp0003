@@ -448,7 +448,7 @@ Plantilla.JugadorCurlingComoFormulario = function (jugador) {
 }
 Plantilla.imprimeUnJugador = function (jugador) {
     let msj = Plantilla.JugadorCurlingComoFormulario(jugador);
-    Frontend.Article.actualizarBoton("Mostrar datos de un jinete", msj)
+    Frontend.Article.actualizarBoton("Mostrar datos de un jugador", msj)
     Plantilla.almacenaJugadorCurling(jugador)
 }
 Plantilla.almacenaJugadorCurling = function (jugador) {
@@ -464,9 +464,9 @@ Plantilla.jugadorComoTabla = function (jugador) {
 }
 
 //--------------------------------------------------
-//------------------Historia de Usuario 12-----------
+//------------------Historia de Usuario 13-----------
 
-Plantilla.PermiteModificarNombre = function (permiso){
+Plantilla.PermiteModificar = function (permiso){
     permiso = (typeof permiso === "undefined" || permiso === null)?true : permiso
     for (let nombre in Plantilla.form){
         document.getElementById(Plantilla.form(nombre)).disabled = permiso
@@ -475,7 +475,7 @@ Plantilla.PermiteModificarNombre = function (permiso){
 }
 
 Plantilla.ImpideModificar = function (){
-    Plantilla.PermiteModificarNombre(true)
+    Plantilla.PermiteModificar(true)
     return this
 }
 Plantilla.PermiteModificar = function(){
@@ -487,9 +487,8 @@ Plantilla.opcionesAMostrar = function (classname, mostrar){
     let opciones = document.getElementsByClassName(classname)
     let claseQuitar = mostrar ? Frontend.CLASS_OCULTAR : Frontend.CLASS_MOSTRAR
     let claseSumar = mostrar ? Frontend.CLASS_OCULTAR : Frontend.CLASS_MOSTRAR
-
-    for (let i = 0; i < operators.length; i++){
-        Frontend.quitarClase(opciones[i], claseQuitar).SumarClase(opciones[i],claseSumar)
+    for (let i = 0; i < opciones.length; i++){
+        Frontend.borrar(opciones[i], claseQuitar).sumarTitulo(opciones[i],claseSumar)
     }
     return this
 }
@@ -527,15 +526,15 @@ Plantilla.guardar = async function () {
         let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
         let id_Curling = document.getElementById("form-jugador-id").value
         const response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'no-cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'omit', // include, *same-origin, omit
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'no-cache',
+            credentials: 'omit',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
+            redirect: 'follow',
+            referrer: 'no-referrer',
             body: JSON.stringify({
                 "id_jugador": id_Curling,
                 "nombre_jugador": document.getElementById("form-jugador-nombre").value,
@@ -546,12 +545,11 @@ Plantilla.guardar = async function () {
                 "categorias_jugadas": document.getElementById("form-jugador-categorias_jugadas").value,
                 "victorias": document.getElementById("form-jugador-victorias").value,
                 "derrotas": document.getElementById("form-jugador-derrotas").value,
-            }), // body data type must match "Content-Type" header
+            }),
         })
         Plantilla.mostrar(id_Curling)
     } catch (error) {
         alert("Error: No se han podido acceder al API Gateway " + error)
-        //console.error(error)
     }
 }
 Plantilla.recuperarDatos = function () {

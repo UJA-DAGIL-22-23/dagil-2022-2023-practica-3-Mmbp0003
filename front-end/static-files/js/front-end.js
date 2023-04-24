@@ -29,10 +29,8 @@ Frontend.Article = {}
  * @returns El propio Article para concatenar llamadas
  */
 Frontend.Article.actualizar = function (titulo, contenido) {
-    // Si son nulos, los sustituyo por la cadena vacía
     titulo = titulo || ""
     contenido = contenido || ""
-    // Sustituyo el título y el contenido del articulo
     document.getElementById( Frontend.ID_SECCION_PRINCIPAL_TITULO ).innerHTML = titulo
     document.getElementById( Frontend.ID_SECCION_PRINCIPAL_CONTENIDO ).innerHTML = contenido
     return this;
@@ -41,7 +39,6 @@ Frontend.Article.actualizar = function (titulo, contenido) {
 Frontend.Article.mostrar = function(){
     let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
 }
-
  Frontend.Article.borrarTitulo = function () {
      document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = "";
      return this;
@@ -53,13 +50,11 @@ Frontend.Article.mostrar = function(){
  Frontend.Article.borrar = function () {
      return this.borrarTitulo().borrarContenido();
  }
- Frontend.Article.aniadirTitulo = function (texto) {
+ Frontend.Article.sumarTitulo = function (texto) {
      document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML += "\n" + texto;
      return this;
  }
  Frontend.Article.actualizarBoton = function (titulo, contenido) {
-     this.borrar()
-         .aniadirTitulo(titulo)
-        return this;
-
-    }
+     this.borrar().sumarTitulo(titulo).mostrar()
+     return this;
+ }
