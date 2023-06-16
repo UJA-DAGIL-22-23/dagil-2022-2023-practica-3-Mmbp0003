@@ -17,7 +17,8 @@ Frontend.ID_SECCION_PRINCIPAL = "seccion-principal"
 Frontend.ID_SECCION_PRINCIPAL_TITULO = "seccion-principal-titulo"
 Frontend.ID_SECCION_PRINCIPAL_CONTENIDO = "seccion-principal-contenido"
 
-
+Frontend.CLASS_MOSTRAR = "mostrar"
+Frontend.CLASS_NO_MOSTRAR = "borrar"
 /// Objeto Article dentro Frontend para tratar con el contenido del elemento Article del DOM
 Frontend.Article = {}
 
@@ -38,6 +39,9 @@ Frontend.Article.actualizar = function (titulo, contenido) {
 
 Frontend.Article.mostrar = function(){
     let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
+    Frontend.borrarClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_NO_MOSTRAR)
+            .aniadirClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_MOSTRAR)
+
 }
 Frontend.Article.borrarTitulo = function () {
     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = "";
@@ -50,6 +54,7 @@ Frontend.Article.borrarContenido = function () {
 Frontend.Article.borrar = function () {
     return this.borrarTitulo().borrarContenido();
 }
+
 Frontend.Article.sumarTitulo = function (texto) {
     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML += "\n" + texto;
     return this;
@@ -82,6 +87,6 @@ Frontend.Article.borrarClase = function(elemento,nombreClase){
     return this;
 }
 Frontend.Article.actualizarBoton = function (titulo, contenido) {
-    this.borrar().sumarTitulo(titulo).mostrar()
+    this.borrar().sumarTitulo(titulo).sumarContenido(contenido).mostrar()
     return this;
 }

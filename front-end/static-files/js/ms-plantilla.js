@@ -230,7 +230,7 @@ Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
                 <td>${Plantilla.plantillaTags.VICTORIAS}</td>
                 <td>${Plantilla.plantillaTags.DERROTAS}</td>
                 <td>
-                    <div><a href="javascript:Plantilla.editar()" class="opcion-secundaria mostrar">Editar</a></div></td>
+                    <div><a href="javascript:Plantilla.mostrar()" class="opcion-secundaria mostrar">Mostrar</a></div></td>
             </tr>`;
 Plantilla.TablaCompleta.pieC =  `</tbody> </table>`;
 
@@ -398,7 +398,7 @@ Plantilla.formulario_form = {
 }
 Plantilla.plantillaFormularioJugadorCurling = {}
 Plantilla.plantillaFormularioJugadorCurling.formulario = `
-<table  class="listado_jugadores">
+<form method='post' action=''> <table  class="listado_jugadores">
     <thead>
         <th>ID</th>
         <th>NOMBRE</th>
