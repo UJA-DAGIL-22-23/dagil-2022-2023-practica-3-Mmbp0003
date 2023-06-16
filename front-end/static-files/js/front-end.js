@@ -1,4 +1,4 @@
- /**
+/**
  * @file front-end.js
  * @description Funciones comunes para todos los módulos de front-end. Debe cargarse la primera de todas.
  * @author Víctor M. Rivas <vrivas@ujaen.es>
@@ -24,7 +24,7 @@ Frontend.Article = {}
 
 /**
  * Cambia toda la información del article
- * @param {String} titulo Información para el título del article 
+ * @param {String} titulo Información para el título del article
  * @param {String} contenido INformacion para el contenido del article
  * @returns El propio Article para concatenar llamadas
  */
@@ -39,22 +39,49 @@ Frontend.Article.actualizar = function (titulo, contenido) {
 Frontend.Article.mostrar = function(){
     let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
 }
- Frontend.Article.borrarTitulo = function () {
-     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = "";
-     return this;
- }
- Frontend.Article.borrarContenido = function () {
-     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML = "";
-     return this;
- }
- Frontend.Article.borrar = function () {
-     return this.borrarTitulo().borrarContenido();
- }
- Frontend.Article.sumarTitulo = function (texto) {
-     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML += "\n" + texto;
-     return this;
- }
- Frontend.Article.actualizarBoton = function (titulo, contenido) {
-     this.borrar().sumarTitulo(titulo).mostrar()
-     return this;
- }
+Frontend.Article.borrarTitulo = function () {
+    document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = "";
+    return this;
+}
+Frontend.Article.borrarContenido = function () {
+    document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML = "";
+    return this;
+}
+Frontend.Article.borrar = function () {
+    return this.borrarTitulo().borrarContenido();
+}
+Frontend.Article.sumarTitulo = function (texto) {
+    document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML += "\n" + texto;
+    return this;
+}
+Frontend.Article.sumarContenido = function (texto) {
+    document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML += "\n" +texto;
+    return this;
+}
+Frontend.Article.aniadirClase = function(elemento,nombreClase){
+    elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
+    let clase = elemento.getAttribute("class")
+    clase = clase.split("   ")
+        .filter(e => e)
+        .filter(e => e != nombreClase)
+        .concat(nombreClase)
+        .join(" ")
+    elemento.setAttribute("class",clase)
+
+    return this;
+}
+Frontend.Article.borrarClase = function(elemento,nombreClase){
+    elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
+    let clase = elemento.getAttribute("class")
+    clase = clase.split( "   ")
+        .filter(e => e)
+        .filter(e => e != nombreClase)
+        .join(" ")
+    elemento.setAttribute("class",clase)
+
+    return this;
+}
+Frontend.Article.actualizarBoton = function (titulo, contenido) {
+    this.borrar().sumarTitulo(titulo).mostrar()
+    return this;
+}
