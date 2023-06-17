@@ -9,7 +9,7 @@
 
 /// Creo el espacio de nombres
 let Plantilla = {};
-
+Plantilla.jugadorMostrado = null;
 // Plantilla de datosDescargados vacíos
 Plantilla.datosDescargadosNulos = {
     mensaje: "Datos Descargados No válidos",
@@ -230,7 +230,7 @@ Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
                 <td>${Plantilla.plantillaTags.VICTORIAS}</td>
                 <td>${Plantilla.plantillaTags.DERROTAS}</td>
                 <td>
-                    <div><a href="javascript:Plantilla.mostrar()" class="opcion-secundaria mostrar">Mostrar</a></div></td>
+                    <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div></td>
             </tr>`;
 Plantilla.TablaCompleta.pieC =  `</tbody> </table>`;
 
@@ -384,17 +384,10 @@ Plantilla.listaOrdenadaC = function(preferencia){
 
 //------------------------------------------------------
 //-------------Historia Usuario 6-----------------------
-Plantilla.jugadorMostrado = null
-Plantilla.formulario_form = {
-    ID: "form-jugador-id",
-    NOMBRE: "form-jugador-nombre",
-    APELLIDOS: "form-jugador-apellido",
-    FECHA_NACIMIENTO: "form-jugador-fecha_nacimiento",
-    PARTICIPACION_JUEGOS_OLIMPICOS: "form-jugador-participacion_juegos_olimpicos",
-    EQUIPO: "form-jugador-equipo",
-    CATEGORIAS_JUGADAS: "form-jugador-categorias_jugadas",
-    VICTORIAS: "form-jugador-victorias",
-    DERROTAS: "form-jugador-derrotas"
+Plantilla.jugadorComoTabla = function (jugador) {
+    return Plantilla.TablaNombres.CabeceraJugadores
+        + Plantilla.TablaNombres.actualiza(jugador)
+        + Plantilla.TablaNombres.pie;
 }
 Plantilla.plantillaFormularioJugadorCurling = {}
 Plantilla.plantillaFormularioJugadorCurling.formulario = `
@@ -409,26 +402,27 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
         <th>CATEGORIAS_JUGADAS</th>
         <th>VICTORIAS</th>
         <th>DERROTAS</th>
+        <th>Accion</th>
     </thead>
     <tbody>
         <tr title="${Plantilla.plantillaTags.ID}">
-            <td><input type="text" class="form-jugador-elemento disabled" disabled id="form-jugdor-id" required value="${Plantilla.plantillaTags.ID}" name="id_jugador"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-nombre" required value="${Plantilla.plantillaTags.NOMBRE}" name="nombre_jugador"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-apellidos" required value="${Plantilla.plantillaTags.APELLIDOS}" name="apellidos_JUGADOR"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-fecha_nacimiento" required value="${Plantilla.plantillaTags.FECHA_NACIMIENTO}" name="fecha_nacimiento_jugador"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-participacion_juegos_olimpicos" required value="${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}" name="participacion_juegos_olimpicos"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-equipo" required value="${Plantilla.plantillaTags.EQUIPO}" name="equipo"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-categorias_jugadas" required value="${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}" name="categorias_jugadas"/></td>
-            <td><input type="text" class="form-jugadorelemento editable" disabled id="form-jugador-victorias required value="${Plantilla.plantillaTags.VICTORIAS}" name="victorias"/></td>
-            <td><input type="text" class="form-jugador-elemento editable" disabled id="form-jugador-derrotas" required value="${Plantilla.plantillaTags.DERROTAS}" name="derrotas"/></td>
+            <td>${Plantilla.plantillaTags.ID}</td>
+            <td>${Plantilla.plantillaTags.NOMBRE}</td>
+            <td>${Plantilla.plantillaTags.APELLIDO}</td>
+            <td>${Plantilla.plantillaTags.FECHA_NACIMIENTO}</td>
+            <td>${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}</td>
+            <td>${Plantilla.plantillaTags.EQUIPO}</td>
+            <td>${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}</td>
+            <td>${Plantilla.plantillaTags.VICTORIAS}</td>
+            <td>${Plantilla.plantillaTags.DERROTAS}</td>
         </tr>
     </tbody>
 </table>
 </form>`;
 
-Plantilla.recuperaUnJugador = async function (idJugador, callBackFn) {
+Plantilla.recuperaUnJugador = async function (id_jugador, callBackFn) {
     try {
-        const url = Frontend.API_GATEWAY + "/plantilla/getPorId/" + idJugador
+        const url = Frontend.API_GATEWAY + "/Plantilla/getPorId/" + id_jugador
         const response = await fetch(url);
         if (response) {
             const jugador = await response.json()
@@ -446,21 +440,16 @@ Plantilla.plantillaFormularioJugadorCurling.actualiza_3 = function (jugador) {
 Plantilla.JugadorCurlingComoFormulario = function (jugador) {
     return Plantilla.plantillaFormularioJugadorCurling.actualiza_3( jugador );
 }
+Plantilla.almacenaJugadorCurling = function (jugador) {
+    Plantilla.jugadorMostrado = jugador;
+}
 Plantilla.imprimeUnJugador = function (jugador) {
     let msj = Plantilla.JugadorCurlingComoFormulario(jugador);
     Frontend.Article.actualizarBoton("Mostrar datos de un jugador", msj)
     Plantilla.almacenaJugadorCurling(jugador)
 }
-Plantilla.almacenaJugadorCurling = function (jugador) {
-    Plantilla.jugadorMostrado = jugador;
-}
-Plantilla.mostrar = function (idJugador) {
-    this.recuperaUnJugador(idJugador, this.imprimeUnJugador);
-}
-Plantilla.jugadorComoTabla = function (jugador) {
-    return Plantilla.TablaNombres.CabeceraJugadores
-        + Plantilla.TablaNombres.actualiza(jugador)
-        + Plantilla.TablaNombres.pie;
+Plantilla.mostrar = function (id_jugador) {
+    this.recuperaUnJugador(id_jugador, this.imprimeUnJugador);
 }
 
 //--------------------------------------------------
