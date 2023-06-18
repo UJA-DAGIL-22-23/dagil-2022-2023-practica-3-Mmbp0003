@@ -37,12 +37,6 @@ Frontend.Article.actualizar = function (titulo, contenido) {
     return this;
 }
 
-Frontend.Article.mostrar = function(){
-    let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
-    Frontend.borrarClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_NO_MOSTRAR)
-            .aniadirClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_MOSTRAR)
-
-}
 Frontend.Article.borrarTitulo = function () {
     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = "";
     return this;
@@ -86,7 +80,17 @@ Frontend.Article.borrarClase = function(elemento,nombreClase){
 
     return this;
 }
+
+Frontend.Article.mostrar = function(){
+    let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
+    Frontend.borrarClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_NO_MOSTRAR)
+        .aniadirClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_MOSTRAR)
+
+}
 Frontend.Article.actualizarBoton = function (titulo, contenido) {
-    this.borrar().sumarTitulo(titulo).sumarContenido(contenido).mostrar()
+    this.borrar()
+        .sumarTitulo(titulo)
+        .sumarContenido(contenido)
+        .mostrar()
     return this;
 }

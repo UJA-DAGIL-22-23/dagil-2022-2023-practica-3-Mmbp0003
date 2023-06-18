@@ -49,7 +49,7 @@ router.post("/setTodos", async (req,res)=>{
     }
 });
 
-router.get("/getPorId/:id_jugador", async (req, res) => {
+router.get("/getPorId/:idCurling", async (req, res) => {
     try {
         await callbacks.getPorId(req, res)
     } catch (error) {

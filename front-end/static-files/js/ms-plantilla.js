@@ -32,6 +32,7 @@ Plantilla.plantillaTags = {
 }
 
 
+
 Plantilla.descargarRuta = async function (ruta, callBackFn) {
     let response = null
 
@@ -385,9 +386,9 @@ Plantilla.listaOrdenadaC = function(preferencia){
 //------------------------------------------------------
 //-------------Historia Usuario 6-----------------------
 Plantilla.jugadorComoTabla = function (jugador) {
-    return Plantilla.TablaNombres.CabeceraJugadores
-        + Plantilla.TablaNombres.actualiza(jugador)
-        + Plantilla.TablaNombres.pie;
+    return Plantilla.TablaCompleta.CabeceraCompleta
+        + Plantilla.TablaCompleta.actualiza_2(jugador)
+        + Plantilla.TablaCompleta.pieC;
 }
 Plantilla.plantillaFormularioJugadorCurling = {}
 Plantilla.plantillaFormularioJugadorCurling.formulario = `
@@ -406,23 +407,41 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
     </thead>
     <tbody>
         <tr title="${Plantilla.plantillaTags.ID}">
-            <td>${Plantilla.plantillaTags.ID}</td>
-            <td>${Plantilla.plantillaTags.NOMBRE}</td>
-            <td>${Plantilla.plantillaTags.APELLIDO}</td>
-            <td>${Plantilla.plantillaTags.FECHA_NACIMIENTO}</td>
-            <td>${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}</td>
-            <td>${Plantilla.plantillaTags.EQUIPO}</td>
-            <td>${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}</td>
-            <td>${Plantilla.plantillaTags.VICTORIAS}</td>
-            <td>${Plantilla.plantillaTags.DERROTAS}</td>
+            <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.ID}" 
+                        name="idCurling"/></td> 
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.NOMBRE}" 
+                        name="nombre"/></td>   
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.APELLIDO}" 
+                        name="apellido"/></td>  
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.FECHA_NACIMIENTO}" 
+                        name="fecha_nacimiento"/></td>  
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}" 
+                        name="participacion_juegos_olimpicos"/></td> 
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.EQUIPO}" 
+                        name="equipo"/></td>
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}" 
+                        name="categorias_jugadas"/></td> 
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.VICTORIAS}" 
+                        name="victorias"/></td>  
+                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-persona-id"
+                        value="${Plantilla.plantillaTags.DERROTAS}" 
+                        name="derrotas"/></td>   
         </tr>
     </tbody>
 </table>
 </form>`;
 
-Plantilla.recuperaUnJugador = async function (id_jugador, callBackFn) {
+Plantilla.recuperaUnJugador = async function (idCurling, callBackFn) {
     try {
-        const url = Frontend.API_GATEWAY + "/Plantilla/getPorId/" + id_jugador
+        const url = Frontend.API_GATEWAY + "/Plantilla/getPorId/" + idCurling
         const response = await fetch(url);
         if (response) {
             const jugador = await response.json()
@@ -445,11 +464,11 @@ Plantilla.almacenaJugadorCurling = function (jugador) {
 }
 Plantilla.imprimeUnJugador = function (jugador) {
     let msj = Plantilla.JugadorCurlingComoFormulario(jugador);
-    Frontend.Article.actualizarBoton("Mostrar datos de un jugador", msj)
+    Frontend.Article.actualizar("Mostrar datos de un jugador", msj)
     Plantilla.almacenaJugadorCurling(jugador)
 }
-Plantilla.mostrar = function (id_jugador) {
-    this.recuperaUnJugador(id_jugador, this.imprimeUnJugador);
+Plantilla.mostrar = function (idCurling) {
+    this.recuperaUnJugador(idCurling, this.imprimeUnJugador);
 }
 
 //--------------------------------------------------
@@ -513,7 +532,7 @@ Plantilla.cancelar = function () {
 Plantilla.guardar = async function () {
     try {
         let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
-        let id_Curling = document.getElementById("form-jugador-id").value
+        let idCurling = document.getElementById("form-jugador-id").value
         const response = await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
@@ -525,7 +544,7 @@ Plantilla.guardar = async function () {
             redirect: 'follow',
             referrer: 'no-referrer',
             body: JSON.stringify({
-                "id_jugador": id_Curling,
+                "idCurling": idCurling,
                 "nombre_jugador": document.getElementById("form-jugador-nombre").value,
                 "apellidos_jugador": document.getElementById("form-jugador-apellidos").value,
                 "f_nac_deportista": document.getElementById("form-deportista-fecha_nacimiento").value,

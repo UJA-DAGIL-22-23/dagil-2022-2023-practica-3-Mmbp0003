@@ -109,7 +109,7 @@ const CB_MODEL_SELECTS = {
     getPorId: async (req, res) => {
         try {
             let jugador = await client.query(
-                q.Get(q.Ref(q.Collection(COLLECTION), req.params.id_jugador))
+                q.Get(q.Ref(q.Collection(COLLECTION), req.params.idCurling))
             )
 
             CORS(res)
