@@ -65,7 +65,7 @@ describe('Servidor PLANTILLA:', () => {
     });
       it('Obtenemos todos los datos del jugador  361826166307291341', (done)=>{
           supertest(app)
-              .get('getId/361826166307291341')
+              .get('getPorId/361826166307291341')
               .expect(200)
               .expect('Content-Type', /json/)
               .expect(function (res){
