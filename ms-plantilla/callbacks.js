@@ -69,9 +69,7 @@ const CB_MODEL_SELECTS = {
                 )
             )
 
-            CORS(res).status(200).json(personas)({
-
-                })
+            CORS(res).status(200).json(personas)
         } catch (error) {
             CORS(res).status(500).json({ error: error.description })
         }

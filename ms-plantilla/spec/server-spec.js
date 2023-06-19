@@ -63,7 +63,7 @@ describe('Servidor PLANTILLA:', () => {
         .end((error) => { error ? done.fail(error) : done(); }
         );
     });
-      it('Obtenemos todos los nombres de los jugadores ', (done)=>{
+      it('Obtenemos todos los datos del jugador  361826166307291341', (done)=>{
           supertest(app)
               .get('getId/361826166307291341')
               .expect(200)
@@ -75,9 +75,9 @@ describe('Servidor PLANTILLA:', () => {
               .end((error) => { error ? done.fail(error) : done() })
       });
 
-      it ('Todas las personas deben tener diez objetos ', (done)=>{
+      it ('El conjunto de personas que hay debe ser 10', (done)=>{
           supertest(app)
-              .get('/getJugadores')
+              .get('/getTodos')
               .expect(200)
               .expect('Content-Type', /json/)
               .expect(function (res){
