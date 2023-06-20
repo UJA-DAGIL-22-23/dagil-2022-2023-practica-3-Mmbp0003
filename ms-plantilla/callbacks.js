@@ -14,18 +14,30 @@ const faunadb = require('faunadb'),
     q = faunadb.query;
 
 const client = new faunadb.Client({
-    secret: 'fnAFB6GE0mAAzLXNj2vH-IeBT3BxL4qHgd7i222d',
+    secret: 'fnAFG5RIulAAzA6IJ3L-SxbEqz0PPNFlhfenjjGA',
 });
 
 const COLLECTION = "Curling"
 
+
+// Necesario para conectar a la BBDD faunadb
+/*
+const faunadb = require('faunadb'),
+    q = faunadb.query;
+
+const client = new faunadb.Client({
+    secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
+});
+
+const COLLECTION = "Personas"
+*/
 // CALLBACKS DEL MODELO
 
 /**
  * Función que permite servir llamadas sin importar el origen:
  * CORS significa Cross-Origin Resource Sharing
  * Dado un objeto de tipo respuesta, le añade las cabeceras necesarias para realizar CROS
- * @param {*} res Objeto de tipo response 
+ * @param {*} res Objeto de tipo response
  * @returns Devuelve el mismo objeto para concatenar varias llamadas al mismo
  */
 function CORS(res) {
@@ -44,7 +56,7 @@ function CORS(res) {
 const CB_MODEL_SELECTS = {
     /**
      * Prueba de conexión a la BBDD: devuelve todas las personas que haya en la BBDD.
-     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
     test_db: async (req, res) => {
@@ -55,30 +67,29 @@ const CB_MODEL_SELECTS = {
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
-            res.status(200).json(personas)
+            if( personas) CORS(res).status(200).json(personas)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            res.status(500).json({error: error.description})
         }
     },
     getTodos: async (req, res) => {
         try {
-            let personas = await client.query (
-                q.Map (
+            let personas = await client.query(
+                q.Map(
                     q.Paginate(q.Documents(q.Collection(COLLECTION))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
 
-            CORS(res).status(200).json(personas)({
-
-                })
-        } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            if( personas ) CORS(res).status(200).json(personas)
+        }
+         catch (error) {
+            CORS(res).status(500).json({error: error.description})
         }
     },
     setTodos: async (req, res) => {
         try {
-            let valor= {}
+            let valor = {}
             let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
             let jugador = await client.query(
                 q.Update(
@@ -99,11 +110,11 @@ const CB_MODEL_SELECTS = {
             )
                 .then((ret) => {
                     valor = ret
-                    CORS(res).status(200).header( 'Content-Type', 'application/json' ).json(valor)
+                    CORS(res).status(200).header('Content-Type', 'application/json').json(valor)
                 })
 
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
     getPorId: async (req, res) => {
@@ -112,18 +123,18 @@ const CB_MODEL_SELECTS = {
                 q.Get(q.Ref(q.Collection(COLLECTION), req.params.idCurling))
             )
 
-            CORS(res)
+            if( jugador ) 
+                CORS(res)
                 .status(200)
                 .json(jugador)
 
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
 
 
 }
-
 
 
 // CALLBACKS ADICIONALES
@@ -134,20 +145,20 @@ const CB_MODEL_SELECTS = {
 const CB_OTHERS = {
     /**
      * Devuelve un mensaje indicando que se ha accedido a la home del microservicio
-     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
     home: async (req, res) => {
         try {
-            CORS(res).status(200).json({ mensaje: "Microservicio MS Plantilla: home" });
+            CORS(res).status(200).json({mensaje: "Microservicio MS Plantilla: home"});
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
 
     /**
      * Devuelve un mensaje indicando que se ha accedido a la información Acerca De del microservicio
-     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
     acercaDe: async (req, res) => {
@@ -159,7 +170,7 @@ const CB_OTHERS = {
                 fecha: "19/01/2001"
             });
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
 
@@ -168,4 +179,4 @@ const CB_OTHERS = {
 // Une todos los callbacks en un solo objeto para poder exportarlos.
 // MUY IMPORTANTE: No debe haber callbacks con el mismo nombre en los distintos objetos, porque si no
 //                 el último que haya SOBREESCRIBE a todos los anteriores.
-exports.callbacks = { ...CB_MODEL_SELECTS, ...CB_OTHERS }
+exports.callbacks = {...CB_MODEL_SELECTS, ...CB_OTHERS}
