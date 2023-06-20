@@ -1,3 +1,7 @@
+ms-plantilla/node_modules
+ms-plantilla/node_modules/*
+ms-plantilla/node_modules/.*
+ms-plantilla/node_modules/.bin/*
 api-gateway/node_modules/.package-lock.json
 api-gateway/node_modules/.bin/jasmine
 api-gateway/node_modules/.bin/mime

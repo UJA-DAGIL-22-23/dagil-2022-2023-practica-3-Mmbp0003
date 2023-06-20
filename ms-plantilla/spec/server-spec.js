@@ -49,41 +49,44 @@ describe('Servidor PLANTILLA:', () => {
    * Tests para acceso a la BBDD
    */
   describe('Acceso a BBDD:', () => {
-    it('Devuelve ¿¿¿ VALOR ESPERADO ??? al consultar mediante test_db', (done) => {
+    beforeEach( function() {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL*=1;
+    })
+    it('Devuelve Sergio al consultar mediante test_db', (done) => {
       supertest(app)
         .get('/test_db')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
           //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.data[0].data.hasOwnProperty('nombre'));
-          assert(res.body.data[0].data.nombre_jugadores.nombre === "Sergio");
+          assert(res.body.data[0].data.hasOwnProperty('nombre_jugador'));
+          assert(res.body.data[0].data.nombre_jugador.nombre === "Sergio");
 
         })
         .end((error) => { error ? done.fail(error) : done(); }
         );
     });
-      it('Obtenemos todos los nombres de los jugadores ', (done)=>{
+      it('Obtenemos los datos del jugador  361826166307291341', (done)=>{
           supertest(app)
-              .get('getId/361826166307291341')
+              .get('/getPorId/361826166307291341')
               .expect(200)
               .expect('Content-Type', /json/)
               .expect(function (res){
-                  assert(res.body.data.hasOwnProperty('nombre'));
-                  assert(res.body.data.nombre == "Sergio");
+                  assert(res.body.data.hasOwnProperty('nombre_jugador'));
+                  assert(res.body.data.nombre_jugador.nombre == "Sergio");
               })
               .end((error) => { error ? done.fail(error) : done() })
       });
 
-      it ('Todas las personas deben tener diez objetos ', (done)=>{
+      it ('En la BBDD debe haber 10 jugadores', (done)=>{
           supertest(app)
-              .get('/getJugadores')
+              .get('/getTodos')
               .expect(200)
               .expect('Content-Type', /json/)
               .expect(function (res){
                   assert(res.body.data.length == 10);
               })
-              .end((error) => {error ? done.fail(error):error})
+              .end((error) => {error ? done.fail(error):done()})
       });
   })
 });
