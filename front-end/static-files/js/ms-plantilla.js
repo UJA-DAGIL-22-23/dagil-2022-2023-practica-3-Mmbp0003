@@ -441,7 +441,7 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
 
 Plantilla.recuperaUnJugador = async function (idCurling, callBackFn) {
     try {
-        const url = Frontend.API_GATEWAY + "/Plantilla/getPorId/" + idCurling
+        const url = Frontend.API_GATEWAY + "/plantilla/getPorId/" + idCurling
         const response = await fetch(url);
         if (response) {
             const jugador = await response.json()
