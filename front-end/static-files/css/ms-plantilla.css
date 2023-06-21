@@ -34,6 +34,21 @@ table.Estilo_Completo thead th{
     height: 2em;
 }
 
+.form-persona-elemento {
+    color: black;
+    background-color: purple;
+    border-width: 0px;
+    text-align: center;
+}
+
+.form-persona-elemento:enabled{
+    color:rgba(0,0,100,0.8);
+}
+
+.form-persona-elemento:required {
+    color:rgba(100,0,0,0.8);
+}
+
 .opcion-principal,
 .opcion-secundaria,
 .opcion-terciaria {
