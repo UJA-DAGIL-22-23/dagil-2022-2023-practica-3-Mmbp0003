@@ -463,9 +463,13 @@ Plantilla.almacenaJugadorCurling = function (jugador) {
     Plantilla.jugadorMostrado = jugador;
 }
 Plantilla.imprimeUnJugador = function (jugador) {
-    let msj = Plantilla.JugadorCurlingComoFormulario(jugador);
-    Frontend.Article.actualizarBoton("Muestras los datos de un jugador", msj)
-    Plantilla.almacenaJugadorCurling(jugador)
+    if (!jugador || typeof jugador !== "object"){
+        elementoTitulo.innerHTML = "Muestras los datos de un jugador";
+    } else {
+        let msj = Plantilla.JugadorCurlingComoFormulario(jugador);
+        Frontend.Article.actualizarBoton("Muestras los datos de un jugador", msj)
+        Plantilla.almacenaJugadorCurling(jugador)
+    }
 }
 Plantilla.mostrar = function (idCurling) {
     this.recuperaUnJugador(idCurling, this.imprimeUnJugador);
