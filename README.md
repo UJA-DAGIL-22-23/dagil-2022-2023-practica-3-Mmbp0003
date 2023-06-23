@@ -442,3 +442,83 @@ En este caso con los test de esta historia de usuario cinco son los mismos que e
 *Trello al acabar la HU.* &#8593;
 
 ![Captura de la segunda HU en Trello](./assets/img/T_5.PNG)
+
+##SEXTA HISTORIA DE USUARIO
+
+En esta Historia de Usuario se nos pide que el usuario pueda ver los datos de un usuario en un formulario de forma que 
+al seleccionar el usuario que queremos ver, nos aparescan todos los datos de esta persona seleccionada.
+
+Durante la programación de esta Historia de Usuario a pasado por un conjunto de fallos que he ido corrigiendo poco a 
+poco; por lo tanto, en el Trello tiene una etapa en la que la HU se encuentra en la zona de problemñatica. 
+
+Por otra parte; hemos añadido unas cuantas de funciones a varias clases y las ire poniendo a continuación.
+
+> Front-end.js 
+
+```
+Frontend.Article.borrarTitulo
+Frontend.Article.borrarContenido
+Frontend.Article.borrar 
+Frontend.Article.sumarTitulo
+Frontend.Article.sumarContenido
+Frontend.Article.aniadirClase
+Frontend.Article.borrarClase
+Frontend.Article.actualizarBoton
+```
+
+Las tres primeras funciones de borrado, tal y como dicen sus nombres se dedica a borrar el titulo y el contenido 
+respectivamente; mientras que, la tercera, hace una llamada de ambas para borrar ambos elementos. Lo mismo pasa con las 
+funciones de suma de título y suma de contenido.
+
+> ms-plantilla-js
+
+```
+Plantilla.jugadorComoTabla
+```
+
+Esta función contiene la tabla de los jugadores con todas las variables que hemos creado en la base de datos de fauna, y
+con el añadido del nuevo botón que nos mostrará el formulario creado.
+
+```
+Plantilla.plantillaFormularioJugadorCurling.formulario
+```
+
+Es la función donde hemos creado el formulario para ver los datos del jugador
+
+```
+Plantilla.recuperaUnJugador
+```
+
+En esta función se busca de las opciones disponible el jugador al que pertenece la id que se ha introducido.
+
+```
+Plantilla.plantillaFormularioJugadorCurling.actualiza_3
+Plantilla.JugadorCurlingComoFormulario
+Plantilla.imprimeUnJugador
+Plantilla.mostrar
+```
+
+Con estas funciones lo que hacemos es actualizar el formulario del jugador, en función del id que hemos seleccionado, lo
+imprimer por pantalla y lo muestra una vez que hemos encontrado al seleccionado.
+
+###TDD
+
+En esta ocasión unicamente hemos hecho un TDD y es en el caso de que durante la busqueda del jugador con la id correspondiente
+se introduzca un valor vacio, siga mostrando los datos necesario
+>Plantilla.RecuperaUnJugador
+
+![Captura de la tabla con el boton nuevo](./assets/img/HU_6.4.PNG)
+*Tabla con mostrar.* &#8593;
+
+![La informacion al darle a mostrar](./assets/img/HU_6.PNG)
+*Tabla al darle a mostrar.* &#8593;
+
+###TRELLO HU_6
+![Captura de la segunda HU en Trello](./assets/img/HU_6.1.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/HU_6.2.PNG)
+*HU con problemas.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/HU_6.3.PNG)
+*Trello al acabar la HU.* &#8593;
