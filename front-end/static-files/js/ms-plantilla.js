@@ -406,34 +406,34 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
         <th width="10%">Accion</th>
     </thead>
     <tbody>
-        <tr title="${Plantilla.plantillaTags.ID}">
-            <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-id"
-                        value="${Plantilla.plantillaTags.ID}" 
-                        name="idCurling"/></td> 
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-nombre"
-                        value="${Plantilla.plantillaTags.NOMBRE}" 
-                        name="nombre_jugador"/></td>   
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-apellido"
+            <tr title="${Plantilla.plantillaTags.ID}">
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-id"
+                            value="${Plantilla.plantillaTags.ID}" 
+                            name="idCurling"/></td>        
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-nombre"
+                         value="${Plantilla.plantillaTags.NOMBRE}" 
+                         name="nombre_jugador"/></td>   
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-apellido"
                         value="${Plantilla.plantillaTags.APELLIDO}" 
                         name="nombre_jugador"/></td>  
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-fecha_nacimiento"
-                        value="${Plantilla.plantillaTags.FECHA_NACIMIENTO}" 
-                        name="fecha_nacimiento"/></td>  
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-participacion_juegos_olimpicos"
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-fecha_nacimiento"
+                         value="${Plantilla.plantillaTags.FECHA_NACIMIENTO}" 
+                         name="fecha_nacimiento"/></td>  
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-participacion_juegos_olimpicos"
                         value="${Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS}" 
                         name="participacion_juegos_olimpicos"/></td> 
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-equipo"
-                        value="${Plantilla.plantillaTags.EQUIPO}" 
-                        name="equipo"/></td>
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-categorias_jugadas"
-                        value="${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}" 
-                        name="categorias_jugadas"/></td> 
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-victorias"
-                        value="${Plantilla.plantillaTags.VICTORIAS}" 
-                        name="victorias"/></td>  
-                    <td><td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-derrotas"
-                        value="${Plantilla.plantillaTags.DERROTAS}" 
-                        name="derrotas"/></td>   
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-equipo"
+                         value="${Plantilla.plantillaTags.EQUIPO}" 
+                         name="Equipo"/></td>
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-categorias_jugadas"
+                         value="${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}" 
+                         name="categorias_jugadas"/></td> 
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-victorias"
+                         value="${Plantilla.plantillaTags.VICTORIAS}" 
+                         name="victorias"/></td>  
+                    <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-derrotas"
+                            value="${Plantilla.plantillaTags.DERROTAS}" 
+                            name="derrotas"/></td>   
         </tr>
     </tbody>
 </table>

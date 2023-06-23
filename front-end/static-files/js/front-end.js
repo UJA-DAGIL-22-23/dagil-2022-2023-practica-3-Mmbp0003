@@ -87,6 +87,7 @@ Frontend.Article.mostrar = function(){
         .aniadirClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_MOSTRAR)
 
 }
+
 Frontend.Article.actualizarBoton = function (titulo, contenido) {
     this.borrar()
         .sumarTitulo(titulo)
