@@ -482,18 +482,18 @@ Plantilla.mostrar = function (idCurling) {
 
 //--------------------------------------------------
 //------------------Histroia de Usuario 12----------
-Plantilla.editar = function () {
+Plantilla.editarNombre = function () {
     this.ocultarOpcionesSecundarias()
     this.mostrarOcionesTerciariasEditar()
     this.PermiteModificar()
 }
-Plantilla.cancelar = function () {
+Plantilla.cancelarNombre = function () {
     this.almacenaJugadorCurling(this.recuperarDatos ())
     this.ImpideModificar()
     this.ocultarOcionesTerciariasEditar()
     this.mostrarOpcionesSecundarias()
 }
-Plantilla.guardar = async function () {
+Plantilla.guardarNombre = async function () {
     try {
         let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
         let idCurling = document.getElementById("form-jugador-id").value
@@ -509,8 +509,8 @@ Plantilla.guardar = async function () {
             referrer: 'no-referrer',
             body: JSON.stringify({
                 "idCurling": idCurling,
-                "nombre_jugador": document.getElementById("form-jugador-nombre").value,
-                "apellidos_jugador": document.getElementById("form-jugador-apellidos").value,
+                "nombre_jugador": document.getElementById("form-jugadores-nombre").value,
+                "apellidos_jugador": document.getElementById("form-jugadores-apellidos").value,
             }),
         })
         Plantilla.mostrar(idCurling)
@@ -520,14 +520,13 @@ Plantilla.guardar = async function () {
 }
 //------------------Historia de Usuario 13-----------
 
-Plantilla.PermiteModificar = function (permiso){
+Plantilla.Modificar = function (permiso){
     permiso = (typeof permiso === "undefined" || permiso === null)?true : permiso
     for (let nombre in Plantilla.form){
         document.getElementById(Plantilla.form(nombre)).disabled = permiso
     }
     return this
 }
-
 Plantilla.ImpideModificar = function (){
     Plantilla.PermiteModificar(true)
     return this
@@ -536,6 +535,8 @@ Plantilla.PermiteModificar = function(){
     Plantilla.PermiteModificar(false)
     return this
 }
+
+
 
 Plantilla.opcionesAMostrar = function (classname, mostrar){
     let opciones = document.getElementsByClassName(classname)
@@ -546,7 +547,6 @@ Plantilla.opcionesAMostrar = function (classname, mostrar){
     }
     return this
 }
-
 Plantilla.ocultarOpcionesSecundarias = function () {
     this.opcionesAMostrar("opcion-secundaria", false)
     return this
@@ -564,6 +564,8 @@ Plantilla.ocultarOcionesTerciariasEditar = function () {
     return this
 }
 
+
+
 Plantilla.editar = function () {
     this.ocultarOpcionesSecundarias()
     this.mostrarOcionesTerciariasEditar()
@@ -591,17 +593,17 @@ Plantilla.guardar = async function () {
             referrer: 'no-referrer',
             body: JSON.stringify({
                 "idCurling": idCurling,
-                "nombre_jugador": document.getElementById("form-jugador-nombre").value,
-                "apellidos_jugador": document.getElementById("form-jugador-apellidos").value,
-                "f_nac_deportista": document.getElementById("form-deportista-fecha_nacimiento").value,
-                "participacion_juegos_olimpicos": document.getElementById("form-jugador-participacion_juegos_olimpicos").value,
-                "equipo": document.getElementById("form-jugador-equipo").value,
-                "categorias_jugadas": document.getElementById("form-jugador-categorias_jugadas").value,
-                "victorias": document.getElementById("form-jugador-victorias").value,
-                "derrotas": document.getElementById("form-jugador-derrotas").value,
+                "nombre_jugador": document.getElementById("form-jugadores-nombre").value,
+                "apellidos_jugador": document.getElementById("form-jugadores-apellidos").value,
+                "f_nac_deportista": document.getElementById("form-jugadores-fecha_nacimiento").value,
+                "participacion_juegos_olimpicos": document.getElementById("form-jugadores-participacion_juegos_olimpicos").value,
+                "equipo": document.getElementById("form-jugadores-equipo").value,
+                "categorias_jugadas": document.getElementById("form-jugadores-categorias_jugadas").value,
+                "victorias": document.getElementById("form-jugadores-victorias").value,
+                "derrotas": document.getElementById("form-jugadores-derrotas").value,
             }),
         })
-        Plantilla.mostrar(id_Curling)
+        Plantilla.mostrar(idCurling)
     } catch (error) {
         alert("Error: No se han podido acceder al API Gateway " + error)
     }
@@ -609,4 +611,3 @@ Plantilla.guardar = async function () {
 Plantilla.recuperarDatos = function () {
     return this.jugadorMostrado;
 }
-

@@ -93,7 +93,7 @@ const CB_MODEL_SELECTS = {
             let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
             let jugador = await client.query(
                 q.Update(
-                    q.Ref(q.Collection(COLLECTION), data.id_jugador),
+                    q.Ref(q.Collection(COLLECTION), data.idCurling),
                     {
                         data: {
                             nombre: data.nombre_jugador.nombre,
