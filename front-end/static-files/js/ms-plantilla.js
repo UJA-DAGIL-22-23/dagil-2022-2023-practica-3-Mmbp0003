@@ -217,7 +217,10 @@ Plantilla.TablaCompleta.CabeceraCompleta =`
            <th>Categorias Jugadas</th>
            <th>Victorias</th>
            <th>Derrotas</th> 
-           <th>Boton</th>
+           <th>Mostrar</th>
+           <th>Editar</th>
+           <th>Cancelar</th>
+           <th>Guardar</th>
         </thead>
        <tbody>`;
 Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
@@ -230,12 +233,10 @@ Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
                 <td>${Plantilla.plantillaTags.CATEGORIAS_JUGADAS}</td>
                 <td>${Plantilla.plantillaTags.VICTORIAS}</td>
                 <td>${Plantilla.plantillaTags.DERROTAS}</td>
-                <td>
-                    <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div>
-                    <div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria editar">EDITAR</a></div>
-                    <div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria cancelar">CANCELAR</a></div>
-                    <div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria guardar">GUARDAR</a></div>
-                </td>
+                <td><div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div></td>
+                <td><div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria editar">EDITAR</a></div></td>
+                <td><div><a href="javascript:Plantilla.cancelar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria cancelar">CANCELAR</a></div>
+                <td><div><a href="javascript:Plantilla.guardar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria guardar">GUARDAR</a></div></td>
             </tr>`;
 Plantilla.TablaCompleta.pieC =  `</tbody> </table>`;
 
