@@ -19,6 +19,9 @@ const OBJETO_NULO = '        '
 const TITULO_JUGADORES_COMPLETOS = "Listado completo de los jugadores de curling"
 const OBJETO_COMPLETO_VACIO = ''
 
+const TITULO_MOSTAR_UN_JUGADOR = "Muestras los datos de un jugador"
+const JUGADOR_VACIO = ''
+
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -233,6 +236,15 @@ describe ("Plantilla.Ordena", function () {
      **/
 })
 
+//--------------------------------TDD HU6-------------------------------------------
+
+describe("Plantilla.recuperaUnJugador: ", function() {
+    it ("Mostrar datos nulos cuadno le pasamos un valor nulo", function() {
+        let jugador = null;
+        Plantilla.imprimeUnJugador(jugador);
+        expect(elementoTitulo.innerText).toBe(TITULO_MOSTAR_UN_JUGADOR);
+    })
+})
 
 /*
 IMPORTANTE
