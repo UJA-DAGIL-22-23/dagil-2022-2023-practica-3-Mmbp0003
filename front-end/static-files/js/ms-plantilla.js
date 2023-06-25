@@ -231,7 +231,11 @@ Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
                 <td>${Plantilla.plantillaTags.VICTORIAS}</td>
                 <td>${Plantilla.plantillaTags.DERROTAS}</td>
                 <td>
-                    <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div></td>
+                    <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div>
+                    <div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria editar">EDITAR</a></div>
+                    <div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria cancelar">CANCELAR</a></div>
+                    <div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria guardar">GUARDAR</a></div>
+                </td>
             </tr>`;
 Plantilla.TablaCompleta.pieC =  `</tbody> </table>`;
 
@@ -476,6 +480,43 @@ Plantilla.mostrar = function (idCurling) {
 }
 
 //--------------------------------------------------
+//------------------Histroia de Usuario 12----------
+Plantilla.editar = function () {
+    this.ocultarOpcionesSecundarias()
+    this.mostrarOcionesTerciariasEditar()
+    this.PermiteModificar()
+}
+Plantilla.cancelar = function () {
+    this.almacenaJugadorCurling(this.recuperarDatos ())
+    this.ImpideModificar()
+    this.ocultarOcionesTerciariasEditar()
+    this.mostrarOpcionesSecundarias()
+}
+Plantilla.guardar = async function () {
+    try {
+        let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
+        let idCurling = document.getElementById("form-jugador-id").value
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'no-cache',
+            credentials: 'omit',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify({
+                "idCurling": idCurling,
+                "nombre_jugador": document.getElementById("form-jugador-nombre").value,
+                "apellidos_jugador": document.getElementById("form-jugador-apellidos").value,
+            }),
+        })
+        Plantilla.mostrar(idCurling)
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway " + error)
+    }
+}
 //------------------Historia de Usuario 13-----------
 
 Plantilla.PermiteModificar = function (permiso){
