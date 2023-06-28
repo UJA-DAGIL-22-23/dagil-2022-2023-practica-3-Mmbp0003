@@ -91,7 +91,7 @@ const CB_MODEL_SELECTS = {
         try {
             let valor = {}
             let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
-            let jugador = await client.query(
+            let jugadores = await client.query(
                 q.Update(
                     q.Ref(q.Collection(COLLECTION), data.idCurling),
                     {

@@ -495,7 +495,7 @@ Plantilla.cancelarNombre = function () {
 Plantilla.guardarNombre = async function () {
     try {
         let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
-        let idCurling = document.getElementById("form-jugador-id").value
+        let idCurling = document.getElementById("form-jugadores-id").value
         const response = await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
@@ -527,16 +527,16 @@ Plantilla.plantillaFormularioJugadorCurling.actualiza_4 = function (jugador) {
 Plantilla.Modificar = function (permiso){
     permiso = (typeof permiso === "undefined" || permiso === null)?true : permiso
     for (let nombre in Plantilla.form){
-        document.getElementById(Plantilla.form(nombre)).disabled = permiso
+        document.getElementById(Plantilla.form[nombre]).disabled = permiso
     }
     return this
 }
 Plantilla.ImpideModificar = function (){
-    Plantilla.PermiteModificar(true)
+    Plantilla.Modificar(true)
     return this
 }
 Plantilla.PermiteModificar = function(){
-    Plantilla.PermiteModificar(false)
+    Plantilla.Modificar(false)
     return this
 }
 
@@ -573,18 +573,27 @@ Plantilla.ocultarOcionesTerciariasEditar = function () {
 Plantilla.editar = function () {
     this.ocultarOpcionesSecundarias()
     this.mostrarOcionesTerciariasEditar()
-    this.Modificar()
+    this.PermiteModificar()
 }
 Plantilla.cancelar = function () {
     this.imprimeUnJugador(this.recuperarDatos())
-    this.Modificar()
+    this.ImpideModificar()
     this.ocultarOcionesTerciariasEditar()
     this.mostrarOpcionesSecundarias()
 }
 Plantilla.guardar = async function () {
     try {
-        let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
-        let idCurling = document.getElementById("form-jugador-id").value
+        let url = Frontend.API_GATEWAY + "/plantilla/setTodos/"
+        let idCurling = document.getElementById("form-jugadores-id").value
+        let nombre = document.getElementById("form-jugadores-nombre").value
+        let apellidos = document.getElementById("form-jugadores-apellidos").value
+        let f_nac_deportista = document.getElementById("form-jugadores-fecha_nacimiento").value
+        let paticiopacion_juegos_olimpicos = document.getElementById("form-jugadores-participacion_juegos_olimpicos").value
+        let equipo = document.getElementById("form-jugadores-equipo").value
+        let categorias_jugadas = document.getElementById("form-jugadores-categorias_jugadas").value
+        let victorias = document.getElementById("form-jugadores-victorias").value
+        let derrotas = document.getElementById("form-jugadores-derrotas").value
+        
         const response = await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
@@ -597,14 +606,14 @@ Plantilla.guardar = async function () {
             referrer: 'no-referrer',
             body: JSON.stringify({
                 "idCurling": idCurling,
-                "nombre_jugador": document.getElementById("form-jugadores-nombre").value,
-                "apellidos_jugador": document.getElementById("form-jugadores-apellidos").value,
-                "f_nac_deportista": document.getElementById("form-jugadores-fecha_nacimiento").value,
-                "participacion_juegos_olimpicos": document.getElementById("form-jugadores-participacion_juegos_olimpicos").value,
-                "equipo": document.getElementById("form-jugadores-equipo").value,
-                "categorias_jugadas": document.getElementById("form-jugadores-categorias_jugadas").value,
-                "victorias": document.getElementById("form-jugadores-victorias").value,
-                "derrotas": document.getElementById("form-jugadores-derrotas").value,
+                "nombre_jugador": nombre,
+                "apellidos_jugador": apellidos,
+                "f_nac_deportista": f_nac_deportista,
+                "participacion_juegos_olimpicos": paticiopacion_juegos_olimpicos,
+                "equipo": equipo,
+                "categorias_jugadas": categorias_jugadas,
+                "victorias": victorias ,
+                "derrotas": derrotas,
             }),
         })
         Plantilla.mostrar(idCurling)
