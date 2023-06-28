@@ -435,7 +435,7 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
                     <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-derrotas"
                             value="${Plantilla.plantillaTags.DERROTAS}" 
                             name="derrotas"/></td> 
-                <td><div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria editar">EDITAR</a></div></td>
+                <td><div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria editar">EDITAR</a></div></td>
                 <td><div><a href="javascript:Plantilla.cancelar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria cancelar">CANCELAR</a></div>
                 <td><div><a href="javascript:Plantilla.guardar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria guardar">GUARDAR</a></div></td>  
         </tr>
@@ -523,6 +523,7 @@ Plantilla.guardarNombre = async function () {
 Plantilla.plantillaFormularioJugadorCurling.actualiza_4 = function (jugador) {
     return Plantilla.sustituyeTagsCompletos(this.formulario, jugador);
 }
+
 Plantilla.Modificar = function (permiso){
     permiso = (typeof permiso === "undefined" || permiso === null)?true : permiso
     for (let nombre in Plantilla.form){
@@ -572,11 +573,11 @@ Plantilla.ocultarOcionesTerciariasEditar = function () {
 Plantilla.editar = function () {
     this.ocultarOpcionesSecundarias()
     this.mostrarOcionesTerciariasEditar()
-    this.PermiteModificar()
+    this.Modificar()
 }
 Plantilla.cancelar = function () {
-    this.almacenaJugadorCurling(this.recuperarDatos ())
-    this.ImpideModificar()
+    this.imprimeUnJugador(this.recuperarDatos())
+    this.Modificar()
     this.ocultarOcionesTerciariasEditar()
     this.mostrarOpcionesSecundarias()
 }
