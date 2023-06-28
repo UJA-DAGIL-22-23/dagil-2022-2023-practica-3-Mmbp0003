@@ -60,11 +60,15 @@ Frontend.Article.sumarContenido = function (texto) {
 Frontend.Article.aniadirClase = function(elemento,nombreClase){
     elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
     let clase = elemento.getAttribute("class")
-    clase = clase.split("   ")
-        .filter(e => e)
-        .filter(e => e != nombreClase)
-        .concat(nombreClase)
-        .join(" ")
+    if (clase ) {
+        clase = clase.split(" ")
+            .filter(e => e)
+            .filter(e => e != nombreClase)
+            .concat(nombreClase)
+            .join(" ")
+    } else {
+        clase =nombreClase
+    }
     elemento.setAttribute("class",clase)
 
     return this;
@@ -72,10 +76,12 @@ Frontend.Article.aniadirClase = function(elemento,nombreClase){
 Frontend.Article.borrarClase = function(elemento,nombreClase){
     elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
     let clase = elemento.getAttribute("class")
-    clase = clase.split( "   ")
+    if (clase ) {
+        clase = clase.split (" ")
         .filter(e => e)
-        .filter(e => e != nombreClase)
-        .join(" ")
+            .filter(e => e != nombreClase)
+            .join(" ")
+    }
     elemento.setAttribute("class",clase)
 
     return this;

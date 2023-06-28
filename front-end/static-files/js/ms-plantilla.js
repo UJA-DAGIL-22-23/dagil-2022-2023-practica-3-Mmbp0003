@@ -593,7 +593,7 @@ Plantilla.guardar = async function () {
         let categorias_jugadas = document.getElementById("form-jugadores-categorias_jugadas").value
         let victorias = document.getElementById("form-jugadores-victorias").value
         let derrotas = document.getElementById("form-jugadores-derrotas").value
-        
+
         const response = await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
