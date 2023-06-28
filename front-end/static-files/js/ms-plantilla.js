@@ -218,9 +218,6 @@ Plantilla.TablaCompleta.CabeceraCompleta =`
            <th>Victorias</th>
            <th>Derrotas</th> 
            <th>Mostrar</th>
-           <th>Editar</th>
-           <th>Cancelar</th>
-           <th>Guardar</th>
         </thead>
        <tbody>`;
 Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
@@ -234,9 +231,6 @@ Plantilla.TablaCompleta.CuerpoCompleto = `<tbody>
                 <td>${Plantilla.plantillaTags.VICTORIAS}</td>
                 <td>${Plantilla.plantillaTags.DERROTAS}</td>
                 <td><div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div></td>
-                <td><div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria editar">EDITAR</a></div></td>
-                <td><div><a href="javascript:Plantilla.cancelar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria cancelar">CANCELAR</a></div>
-                <td><div><a href="javascript:Plantilla.guardar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria guardar">GUARDAR</a></div></td>
             </tr>`;
 Plantilla.TablaCompleta.pieC =  `</tbody> </table>`;
 
@@ -408,7 +402,9 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
         <th width="10%">CATEGORIAS_JUGADAS</th>
         <th width="10%">VICTORIAS</th>
         <th width="10%">DERROTAS</th>
-        <th width="10%">Accion</th>
+        <th>Editar</th>
+        <th>Cancelar</th>
+        <th>Guardar</th>
     </thead>
     <tbody>
             <tr title="${Plantilla.plantillaTags.ID}">
@@ -438,7 +434,10 @@ Plantilla.plantillaFormularioJugadorCurling.formulario = `
                          name="victorias"/></td>  
                     <td><input type="text" class="form-jugadores-elemento" disabled id="form-jugadores-derrotas"
                             value="${Plantilla.plantillaTags.DERROTAS}" 
-                            name="derrotas"/></td>   
+                            name="derrotas"/></td> 
+                <td><div><a href="javascript:Plantilla.editar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria editar">EDITAR</a></div></td>
+                <td><div><a href="javascript:Plantilla.cancelar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria cancelar">CANCELAR</a></div>
+                <td><div><a href="javascript:Plantilla.guardar('${Plantilla.plantillaTags.ID}')" class="opcion-terciaria guardar">GUARDAR</a></div></td>  
         </tr>
     </tbody>
 </table>
@@ -519,7 +518,11 @@ Plantilla.guardarNombre = async function () {
     }
 }
 //------------------Historia de Usuario 13-----------
+//Usaremos el formulario de la HU 06
 
+Plantilla.plantillaFormularioJugadorCurling.actualiza_4 = function (jugador) {
+    return Plantilla.sustituyeTagsCompletos(this.formulario, jugador);
+}
 Plantilla.Modificar = function (permiso){
     permiso = (typeof permiso === "undefined" || permiso === null)?true : permiso
     for (let nombre in Plantilla.form){
