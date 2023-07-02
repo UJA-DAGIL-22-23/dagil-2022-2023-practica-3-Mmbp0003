@@ -481,42 +481,8 @@ Plantilla.mostrar = function (idCurling) {
 
 //--------------------------------------------------
 //------------------Histroia de Usuario 12----------
-Plantilla.editarNombre = function () {
-    this.ocultarOpcionesSecundarias()
-    this.mostrarOcionesTerciariasEditar()
-    this.PermiteModificar()
-}
-Plantilla.cancelarNombre = function () {
-    this.almacenaJugadorCurling(this.recuperarDatos ())
-    this.ImpideModificar()
-    this.ocultarOcionesTerciariasEditar()
-    this.mostrarOpcionesSecundarias()
-}
-Plantilla.guardarNombre = async function () {
-    try {
-        let url = Frontend.API_GATEWAY + "/plantilla/setTodo/"
-        let idCurling = document.getElementById("form-jugadores-id").value
-        const response = await fetch(url, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'no-cache',
-            credentials: 'omit',
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            body: JSON.stringify({
-                "idCurling": idCurling,
-                "nombre_jugador": document.getElementById("form-jugadores-nombre").value,
-                "apellidos_jugador": document.getElementById("form-jugadores-apellidos").value,
-            }),
-        })
-        Plantilla.mostrar(idCurling)
-    } catch (error) {
-        alert("Error: No se han podido acceder al API Gateway " + error)
-    }
-}
+
+
 //------------------Historia de Usuario 13-----------
 //Usaremos el formulario de la HU 06
 
@@ -531,6 +497,16 @@ Plantilla.Modificar = function (permiso){
     }
     return this
 }
+Plantilla.form = {
+    NOMBRE : "form-jugadores-nombre",
+    APELLIDO: "form-jugadores-apellido",
+    FECHA_NACIMIENTO: "form-jugadores-fecha-nacimiento",
+    PARTICIPACION_JUEGOS_OLIMPICOS: "form-jugadores-participacion-juegos-olimpicos",
+    EQUIPO: "form-jugadores-equipo",
+    CATEGORIAS_JUGADAS: "form-jugadores-categorias-jugadas",
+    VICTORIAS: "form-jugadores-victorias",
+    DERROTAS: "form-jugadores-derrotas",
+}
 Plantilla.ImpideModificar = function (){
     Plantilla.Modificar(true)
     return this
@@ -542,10 +518,10 @@ Plantilla.PermiteModificar = function(){
 
 
 
-Plantilla.opcionesMostrarOcultar = function (classname, mostrar){
+Plantilla.opcionesMostrarOcultar = function (classname, mostramos){
     let opciones = document.getElementsByClassName(classname)
-    let claseQuitar = mostrar ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
-    let claseSumar = !mostrar ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
+    let claseQuitar = mostramos ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
+    let claseSumar =  !mostramos ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
     for (let i = 0; i < opciones.length; i++){
         Frontend.borrarClase(opciones[i], claseQuitar).aniadirClase(opciones[i],claseSumar)
     }
