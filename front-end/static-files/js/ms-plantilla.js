@@ -542,29 +542,29 @@ Plantilla.PermiteModificar = function(){
 
 
 
-Plantilla.opcionesAMostrar = function (classname, mostrar){
+Plantilla.opcionesMostrarOcultar = function (classname, mostrar){
     let opciones = document.getElementsByClassName(classname)
-    let claseQuitar = mostrar ? Frontend.CLASS_OCULTAR : Frontend.CLASS_MOSTRAR
-    let claseSumar = mostrar ? Frontend.CLASS_OCULTAR : Frontend.CLASS_MOSTRAR
+    let claseQuitar = mostrar ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
+    let claseSumar = !mostrar ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
     for (let i = 0; i < opciones.length; i++){
         Frontend.borrarClase(opciones[i], claseQuitar).aniadirClase(opciones[i],claseSumar)
     }
     return this
 }
 Plantilla.ocultarOpcionesSecundarias = function () {
-    this.opcionesAMostrar("opcion-secundaria", false)
+    this.opcionesMostrarOcultar("opcion-secundaria", false)
     return this
 }
 Plantilla.mostrarOpcionesSecundarias = function () {
-    this.opcionesAMostrar("opcion-secundaria", true)
+    this.opcionesMostrarOcultar("opcion-secundaria", true)
     return this
 }
 Plantilla.mostrarOcionesTerciariasEditar = function () {
-    this.opcionesAMostrar("opcion-terciaria editar", true)
+    this.opcionesMostrarOcultar("opcion-terciaria editar", true)
     return this
 }
 Plantilla.ocultarOcionesTerciariasEditar = function () {
-    this.opcionesAMostrar("opcion-terciaria editar", false)
+    this.opcionesMostrarOcultar("opcion-terciaria editar", false)
     return this
 }
 
