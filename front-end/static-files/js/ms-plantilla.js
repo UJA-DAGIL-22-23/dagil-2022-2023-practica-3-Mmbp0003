@@ -517,7 +517,6 @@ Plantilla.PermiteModificar = function(){
 }
 
 
-
 Plantilla.opcionesMostrarOcultar = function (classname, mostramos){
     let opciones = document.getElementsByClassName(classname)
     let claseQuitar = mostramos ? Frontend.CLASS_NO_MOSTRAR : Frontend.CLASS_MOSTRAR
@@ -559,7 +558,7 @@ Plantilla.cancelar = function () {
 }
 Plantilla.guardar = async function () {
     try {
-        const url = Frontend.API_GATEWAY + "/plantilla/setTodos/"
+        let url = Frontend.API_GATEWAY + "/plantilla/setTodos/"
         let idCurling = document.getElementById("form-jugadores-id").value
         let nombre = document.getElementById("form-jugadores-nombre").value
         let apellidos = document.getElementById("form-jugadores-apellidos").value
@@ -582,7 +581,7 @@ Plantilla.guardar = async function () {
             referrer: 'no-referrer',
             body: JSON.stringify({
                 "idCurling": idCurling,
-                "nombre_jugador": nombre,
+                "nombre": nombre,
                 "apellidos_jugador": apellidos,
                 "f_nac_deportista": f_nac_deportista,
                 "participacion_juegos_olimpicos": paticiopacion_juegos_olimpicos,
