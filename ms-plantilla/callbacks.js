@@ -96,8 +96,8 @@ const CB_MODEL_SELECTS = {
                     q.Ref(q.Collection(COLLECTION), data.idCurling),
                     {
                         data: {
-                            nombre: data.nombre,
-                            apellido: data.apellido,
+                            nombre: data.nombre_jugador.nombre,
+                            apellido: data.nombre_jugador.apellido,
                             fecha_nacimiento: data.fecha_nacimiento,
                             participacion_juegos_olimpicos: data.participacion_juegos_olimpicos,
                             equipo: data.equipo,

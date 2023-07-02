@@ -525,7 +525,7 @@ Plantilla.plantillaFormularioJugadorCurling.actualiza_4 = function (jugador) {
 }
 
 Plantilla.Modificar = function (permiso){
-    permiso = (typeof permiso === "undefined" || permiso === null)?true : permiso
+    permiso = (typeof permiso === "undefined" || permiso === null) ? true : permiso
     for (let nombre in Plantilla.form){
         document.getElementById(Plantilla.form[nombre]).disabled = permiso
     }
@@ -547,7 +547,7 @@ Plantilla.opcionesAMostrar = function (classname, mostrar){
     let claseQuitar = mostrar ? Frontend.CLASS_OCULTAR : Frontend.CLASS_MOSTRAR
     let claseSumar = mostrar ? Frontend.CLASS_OCULTAR : Frontend.CLASS_MOSTRAR
     for (let i = 0; i < opciones.length; i++){
-        Frontend.borrar(opciones[i], claseQuitar).sumarTitulo(opciones[i],claseSumar)
+        Frontend.borrarClase(opciones[i], claseQuitar).aniadirClase(opciones[i],claseSumar)
     }
     return this
 }
@@ -583,7 +583,7 @@ Plantilla.cancelar = function () {
 }
 Plantilla.guardar = async function () {
     try {
-        let url = Frontend.API_GATEWAY + "/plantilla/setTodos/"
+        const url = Frontend.API_GATEWAY + "/plantilla/setTodos/"
         let idCurling = document.getElementById("form-jugadores-id").value
         let nombre = document.getElementById("form-jugadores-nombre").value
         let apellidos = document.getElementById("form-jugadores-apellidos").value
@@ -623,4 +623,10 @@ Plantilla.guardar = async function () {
 }
 Plantilla.recuperarDatos = function () {
     return this.jugadorMostrado;
+}
+Plantilla.CambiamosDatos = function (search){
+    this.recupera(Plantilla.TablaCompletaJugadores)
+}
+Plantilla.almacenamosDatos =  function (jugador){
+    Plantilla.jugadorMostrado = jugador;
 }

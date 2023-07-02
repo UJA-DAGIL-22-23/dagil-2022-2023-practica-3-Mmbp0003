@@ -57,7 +57,7 @@ Frontend.Article.sumarContenido = function (texto) {
     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML += "\n" +texto;
     return this;
 }
-Frontend.Article.aniadirClase = function(elemento,nombreClase){
+Frontend.aniadirClase = function(elemento,nombreClase){
     elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
     let clase = elemento.getAttribute("class")
     if (clase ) {
@@ -73,7 +73,7 @@ Frontend.Article.aniadirClase = function(elemento,nombreClase){
 
     return this;
 }
-Frontend.Article.borrarClase = function(elemento,nombreClase){
+Frontend.borrarClase = function(elemento,nombreClase){
     elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
     let clase = elemento.getAttribute("class")
     if (clase ) {
