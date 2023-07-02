@@ -500,10 +500,10 @@ Plantilla.Modificar = function (permiso){
 Plantilla.form = {
     NOMBRE : "form-jugadores-nombre",
     APELLIDO: "form-jugadores-apellido",
-    FECHA_NACIMIENTO: "form-jugadores-fecha-nacimiento",
-    PARTICIPACION_JUEGOS_OLIMPICOS: "form-jugadores-participacion-juegos-olimpicos",
+    FECHA_NACIMIENTO: "form-jugadores-fecha_nacimiento",
+    PARTICIPACION_JUEGOS_OLIMPICOS: "form-jugadores-participacion_juegos_olimpicos",
     EQUIPO: "form-jugadores-equipo",
-    CATEGORIAS_JUGADAS: "form-jugadores-categorias-jugadas",
+    CATEGORIAS_JUGADAS: "form-jugadores-categorias_jugadas",
     VICTORIAS: "form-jugadores-victorias",
     DERROTAS: "form-jugadores-derrotas",
 }
