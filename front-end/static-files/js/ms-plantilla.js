@@ -239,7 +239,11 @@ Plantilla.sustituyeTagsCompletos = function (plantilla_, jugador_Cu) {
         .replace(new RegExp(Plantilla.plantillaTags.ID, 'g'), jugador_Cu.ref['@ref'].id)
         .replace(new RegExp(Plantilla.plantillaTags.NOMBRE  , 'g'), jugador_Cu.data.nombre_jugador.nombre )
         .replace(new RegExp(Plantilla.plantillaTags.APELLIDO  , 'g'), jugador_Cu.data.nombre_jugador.apellido )
-        .replace(new RegExp(Plantilla.plantillaTags.FECHA_NACIMIENTO, 'g'), jugador_Cu.data.fecha_nacimiento.dia + "/" + jugador_Cu.data.fecha_nacimiento.mes )
+        .replace(new RegExp(Plantilla.plantillaTags.FECHA_NACIMIENTO, 'g'), jugador_Cu.data.fecha_nacimiento.dia 
+                    + "/" 
+                    + jugador_Cu.data.fecha_nacimiento.mes
+                    + "/" 
+                    + jugador_Cu.data.fecha_nacimiento["año"] )
         .replace(new RegExp(Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS, 'g'), jugador_Cu.data.participacion_juegos_olimpicos)
         .replace(new RegExp(Plantilla.plantillaTags.EQUIPO, 'g'), jugador_Cu.data.equipo)
         .replace(new RegExp(Plantilla.plantillaTags.CATEGORIAS_JUGADAS, 'g'), jugador_Cu.data.categorias_jugadas)
@@ -561,7 +565,7 @@ Plantilla.guardar = async function () {
         let url = Frontend.API_GATEWAY + "/plantilla/setTodos/"
         let idCurling = document.getElementById("form-jugadores-id").value
         let nombre = document.getElementById("form-jugadores-nombre").value
-        let apellidos = document.getElementById("form-jugadores-apellidos").value
+        let apellidos = document.getElementById("form-jugadores-apellido").value
         let f_nac_deportista = document.getElementById("form-jugadores-fecha_nacimiento").value
         let paticiopacion_juegos_olimpicos = document.getElementById("form-jugadores-participacion_juegos_olimpicos").value
         let equipo = document.getElementById("form-jugadores-equipo").value
