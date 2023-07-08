@@ -239,19 +239,9 @@ Plantilla.sustituyeTagsCompletos = function (plantilla_, jugador_Cu) {
         .replace(new RegExp(Plantilla.plantillaTags.ID, 'g'), jugador_Cu.ref['@ref'].id)
         .replace(new RegExp(Plantilla.plantillaTags.NOMBRE  , 'g'), jugador_Cu.data.nombre_jugador.nombre )
         .replace(new RegExp(Plantilla.plantillaTags.APELLIDO  , 'g'), jugador_Cu.data.nombre_jugador.apellido )
-<<<<<<< HEAD
         .replace(new RegExp(Plantilla.plantillaTags.FECHA_NACIMIENTO, 'g'), jugador_Cu.data.fecha_nacimiento.dia
             + "/"
-            + jugador_Cu.data.fecha_nacimiento.mes
-            + "/"
-            + jugador_Cu.data.fecha_nacimiento["año"] )
-=======
-        .replace(new RegExp(Plantilla.plantillaTags.FECHA_NACIMIENTO, 'g'), jugador_Cu.data.fecha_nacimiento.dia 
-                    + "/" 
-                    + jugador_Cu.data.fecha_nacimiento.mes
-                    + "/" 
-                    + jugador_Cu.data.fecha_nacimiento["año"] )
->>>>>>> 6a74a815803e1c1a8a7a11c6c60e7a31f3740799
+            + jugador_Cu.data.fecha_nacimiento.mes  )
         .replace(new RegExp(Plantilla.plantillaTags.PARTICIPACION_JUEGOS_OLIMPICOS, 'g'), jugador_Cu.data.participacion_juegos_olimpicos)
         .replace(new RegExp(Plantilla.plantillaTags.EQUIPO, 'g'), jugador_Cu.data.equipo)
         .replace(new RegExp(Plantilla.plantillaTags.CATEGORIAS_JUGADAS, 'g'), jugador_Cu.data.categorias_jugadas)
@@ -574,7 +564,7 @@ Plantilla.guardar = async function () {
         let idCurling = document.getElementById("form-jugadores-id").value
         let nombre = document.getElementById("form-jugadores-nombre").value
         let apellidos = document.getElementById("form-jugadores-apellido").value
-        let f_nac_deportista = document.getElementById("form-jugadores-fecha_nacimiento").value
+        let fecha_nacimiento = document.getElementById("form-jugadores-fecha_nacimiento").value
         let paticiopacion_juegos_olimpicos = document.getElementById("form-jugadores-participacion_juegos_olimpicos").value
         let equipo = document.getElementById("form-jugadores-equipo").value
         let categorias_jugadas = document.getElementById("form-jugadores-categorias_jugadas").value
@@ -595,7 +585,7 @@ Plantilla.guardar = async function () {
                 "idCurling": idCurling,
                 "nombre": nombre,
                 "apellidos_jugador": apellidos,
-                "f_nac_deportista": f_nac_deportista,
+                "fecha_nacimiento": fecha_nacimiento,
                 "participacion_juegos_olimpicos": paticiopacion_juegos_olimpicos,
                 "equipo": equipo,
                 "categorias_jugadas": categorias_jugadas,

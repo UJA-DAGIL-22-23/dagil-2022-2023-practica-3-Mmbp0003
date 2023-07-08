@@ -101,16 +101,17 @@ const CB_MODEL_SELECTS = {
                                 nombre: data.nombre,
                                 apellido: data.apellidos_jugador,
                             },
+                            /*
                             fecha_nacimiento: {
-                                dia: parseInt(data.f_nac_deportista.split("/")[0]),
-                                mes:parseInt(data.f_nac_deportista.split("/")[1]),
-                                "año": parseInt(data.f_nac_deportista.split("/")[2]),
+                                dia: parseInt(data.fecha_nacimiento.split("/")[0]),
+                                mes:parseInt(data.fecha_nacimiento.split("/")[1]),
                             },
-                            
+                            */
                             participacion_juegos_olimpicos: data.
                                                             participacion_juegos_olimpicos.
                                                             split(",").
                                                             map(e=>parseInt(e)),
+                            equipo: data.equipo,
                             /*equipo: data.equipo,
                             categorias_jugadas: data.categorias_jugadas,
                             victorias: data.victorias,
