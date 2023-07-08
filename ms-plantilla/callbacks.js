@@ -113,10 +113,8 @@ const CB_MODEL_SELECTS = {
                                                             map(e=>parseInt(e)),
                             equipo: data.equipo,
                             categorias_jugadas: data.categorias_jugadas,
-                            /*equipo: data.equipo,
-                            categorias_jugadas: data.categorias_jugadas,
-                            victorias: data.victorias,
-                            derrotas: data.derrotas*/
+                            victorias: parseInt.victorias,
+                            derrotas: parseInt.derrotas
                         },
                     },
                 )
