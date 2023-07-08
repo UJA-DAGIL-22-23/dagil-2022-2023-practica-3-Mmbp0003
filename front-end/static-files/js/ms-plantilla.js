@@ -564,7 +564,7 @@ Plantilla.guardar = async function () {
         let idCurling = document.getElementById("form-jugadores-id").value
         let nombre = document.getElementById("form-jugadores-nombre").value
         let apellidos = document.getElementById("form-jugadores-apellido").value
-        let fecha_nacimiento = document.getElementById("form-jugadores-fecha_nacimiento").value
+        let f_nac_deportista = document.getElementById("form-jugadores-fecha_nacimiento").value
         let paticiopacion_juegos_olimpicos = document.getElementById("form-jugadores-participacion_juegos_olimpicos").value
         let equipo = document.getElementById("form-jugadores-equipo").value
         let categorias_jugadas = document.getElementById("form-jugadores-categorias_jugadas").value
@@ -585,7 +585,7 @@ Plantilla.guardar = async function () {
                 "idCurling": idCurling,
                 "nombre": nombre,
                 "apellidos_jugador": apellidos,
-                "fecha_nacimiento": fecha_nacimiento,
+                "f_nac_deportista": f_nac_deportista,
                 "participacion_juegos_olimpicos": paticiopacion_juegos_olimpicos,
                 "equipo": equipo,
                 "categorias_jugadas": categorias_jugadas,

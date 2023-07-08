@@ -103,8 +103,8 @@ const CB_MODEL_SELECTS = {
                             },
                             /*
                             fecha_nacimiento: {
-                                dia: parseInt(data.fecha_nacimiento.split("/")[0]),
-                                mes:parseInt(data.fecha_nacimiento.split("/")[1]),
+                                dia: parseInt(data.f_nac_deportista.split("/")[0]),
+                                mes:parseInt(data.f_nac_deportista.split("/")[1]),
                             },
                             */
                             participacion_juegos_olimpicos: data.
@@ -112,6 +112,7 @@ const CB_MODEL_SELECTS = {
                                                             split(",").
                                                             map(e=>parseInt(e)),
                             equipo: data.equipo,
+                            categorias_jugadas: data.categorias_jugadas,
                             /*equipo: data.equipo,
                             categorias_jugadas: data.categorias_jugadas,
                             victorias: data.victorias,
