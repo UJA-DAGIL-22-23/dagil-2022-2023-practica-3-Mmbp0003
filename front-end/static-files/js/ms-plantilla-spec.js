@@ -277,22 +277,24 @@ describe("Plantilla.editar", function () {
         expect(Plantilla.editar).toBeDefined();
     })
 
-    it("Conecta y funciona correctamente con ocultarOpcionesSecundarias", function () {
+    it("Conecta y funciona correctamente con las funciones", function () {
         spyOn(Plantilla, "ocultarOpcionesSecundarias");
-        Plantilla.editar();
-        expect(Plantilla.ocultarOpcionesSecundarias).toHaveBeenCalled();
-    });
-    it("Conecta y funciona correctamente con mostrarOcionesTerciariasEditar", function () {
         spyOn(Plantilla, "mostrarOcionesTerciariasEditar");
-        Plantilla.editar();
-        expect(Plantilla.mostrarOcionesTerciariasEditar).toHaveBeenCalled();
-    });
-    it("Conecta y funciona correctamente con PermiteModificar", function () {
         spyOn(Plantilla, "PermiteModificar");
+
         Plantilla.editar();
+
+        expect(Plantilla.ocultarOpcionesSecundarias).toHaveBeenCalled();
+        expect(Plantilla.mostrarOcionesTerciariasEditar).toHaveBeenCalled();
         expect(Plantilla.PermiteModificar).toHaveBeenCalled();
     });
-})
+});
+
+describe("Plantilla.cancelar", function () {
+    it ('existe la funcion cancelar', () => {
+        expect(Plantilla.cancelar).toBeDefined();
+    })
+});
 /*
 IMPORTANTE
 ==========
