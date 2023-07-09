@@ -246,6 +246,28 @@ describe("Plantilla.recuperaUnJugador: ", function() {
     })
 })
 
+
+//---------------------------------TDD HU12-----------------------------------------
+
+describe("Plantilla.Modificar", function (){
+        beforeEach(function () {
+            Plantilla.form = { habilitar: "habilitar", };
+            var form = document.createElement("form");
+            form.innerHTML = ` <input id="habilitar" />`;
+            document.body.appendChild(form);
+        })
+
+        //Existe la función modificar
+        it('existe la función Modificar', () => {
+            expect (Plantilla.Modificar).toBeDefined();
+        });
+
+        it("se pueden modificar los datos editables", function () {
+            Plantilla.Modificar(false);
+            expect(document.getElementById("habilitar").disabled).toEqual(false);
+        })
+
+})
 /*
 IMPORTANTE
 ==========
