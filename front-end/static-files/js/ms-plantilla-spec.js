@@ -308,6 +308,43 @@ describe("Plantilla.cancelar", function () {
         expect(Plantilla.mostrarOpcionesSecundarias).toHaveBeenCalled();
     });
 });
+
+describe ("Plantilla.guardar", function () {
+    it ('existe la funcion guardar', () => {
+        expect(Plantilla.guardar).toBeDefined();
+    })
+});
+
+describe("Plantilla.almacenaDatos", function (){
+    it ("Guarda al jugador Curling correctamente", function () {
+        var jugadorCurling = {
+            nombre_jugador: {
+                nombre: "Kevin",
+                apellido: "Martin"
+            },
+            participacion_juegos_olimpicos: [2002,2010,1991,2008],
+            equipo: "equipo masculino canadiense"
+        };
+        Plantilla.almacenamosDatos(jugadorCurling);
+        expect(Plantilla.jugadorMostrado).toEqual(jugadorCurling);
+    })
+});
+
+describe("Plantilla.recuperaDatos", function (){
+    it ("Recupera el jugador Curling correctamente", function () {
+        var jugadorCurling = {
+            nombre_jugador: {
+                nombre: "Kevin",
+                apellido: "Martin"
+            },
+            participacion_juegos_olimpicos: [2002,2010,1991,2008],
+            equipo: "equipo masculino canadiense"
+        };
+        Plantilla.jugadorMostrado = jugadorCurling
+        const Dato = Plantilla.recuperarDatos();
+        expect(Dato).toBe(jugadorCurling);
+    })
+});
 /*
 IMPORTANTE
 ==========
