@@ -634,3 +634,43 @@ router.post("/setTodos"
 
 ![Captura de la segunda HU en Trello](./assets/img/T_12.2.PNG)
 *Trello al acabar la HU.* &#8593;
+
+##TRECEAVA HISTORIA DE USUARIO
+
+En este caso esta historia de usuario sería como un ampliamente de la anterior, ahora deberíamos poder no solo modificar 
+el nombre si no que deberiamos poder modificar tres campos más a parte de ese. En mi caso, podriamos cambiarlos casi todos 
+los campos. 
+En esta Historia de Usuario lo que he hecho es una ampliación de la anterior, y he añadidio lineas de programación a lo 
+que teníamos anteriormente para que funcione; por lo tanto, esas funciones serían.
+
+> ms-plantilla.js
+
+```
+Plantilla.guardar
+```
+
+Ahora en la función guardar se hace un llamamiento a todos los campos del jugador que está en la base de datos y lo mismo 
+pasaría con 
+
+> ms-Plantilla/callbacks.js
+
+```
+getTodos
+```
+
+![Captura de la tabla con el boton nuevo](./assets/img/HU12.PNG)
+*Tabla cuando seleccionas editar.* &#8593;
+
+![Captura de la tabla con el boton nuevo](./assets/img/HU_13.1.PNG)
+*Tabla cuando editamos todos los campos (menos la fecha).* &#8593;
+
+![La informacion al darle a mostrar](./assets/img/HU13.2.PNG)
+*Tabla al guardar los campos.* &#8593;
+
+###TRELLO HU_13
+![Captura de la segunda HU en Trello](./assets/img/T13.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/T13.2.PNG)
+*Trello al acabar la HU.* &#8593;
+
