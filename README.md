@@ -522,3 +522,115 @@ se introduzca un valor vacio, siga mostrando los datos necesario
 
 ![Captura de la segunda HU en Trello](./assets/img/HU_6.3.PNG)
 *Trello al acabar la HU.* &#8593;
+
+##DOCEAVA HISTORIA DE USUARIO
+
+En esta historia de usuario se nos pide que podamos modificar el nombre del jugador de nuestra base de datos por otro a 
+elección del usuario que esté modificando el programa que estamos creando.
+
+Por lo tanto para que esta historia de usuario funcionase hemos tenido que añadir unas nuevas funciones que ire indicando
+y explicando a continuación, comenzamos por donde hemos añadido más funciones con diferencia
+
+> ms-plantilla.js
+
+```
+Plantilla.plantillaFormularioJugadorCurling.actualiza_4
+Plantilla.Modificar
+Plantilla.form
+
+Plantilla.ImpideModificar
+Plantilla.PermiteModificar
+
+Plantilla.opcionesMostrarOcultar
+Plantilla.ocultarOpcionesSecundarias
+Plantilla.mostrarOpcionesSecundarias
+Plantilla.mostrarOcionesTerciariasEditar
+Plantilla.ocultarOcionesTerciariasEditar 
+
+Plantilla.editar 
+Plantilla.cancelar
+Plantilla.guardar
+
+Plantilla.recuperarDatos
+Plantilla.CambiamosDatos
+Plantilla.almacenamosDatos
+```
+A continuación explicaré que funciones tienen aquellas que cuantas con una mayor importancia en el programa y en la Historia 
+de Usuario 12 por consecuencia
+
+```
+Plantilla.Modificar
+```
+
+Esta función a la que se le llama desde otras dos funciones con nombres parecidos (Plantilla.ImpideModificar  Plantilla.PermiteModificar).
+Sabiendo esto podemos decir que Plantilla Modificar es aquella que deshabilita y habilita los elementos del formulario
+en función de si permiso devuelve true o false; lo cual, depende de la función que lo llame, si lo llama ImpideModificar
+devolverá true y en el caso contrario devolverá false.
+
+```
+Plantilla.opcionesMostrarOcultar
+Plantilla.ocultarOpcionesSecundarias
+Plantilla.mostrarOpcionesSecundarias
+Plantilla.mostrarOcionesTerciariasEditar
+Plantilla.ocultarOcionesTerciariasEditar 
+```
+
+Estas funciones tienen un parecido a las funciones ImpideModificar y PermiteModificar; pero en este caso lo que hace en 
+ocultar las opciones y mostrarlas dependiendo de la función a la que se lllame
+
+```
+Plantilla.opcionesMostrarOcultar
+```
+
+Esta función es a la que llaman las explicadas con antelación, se usa para mostrar u ocultar las opciones en función del 
+CDD determinaddo. Si mostramos nos devuelve true, se quita la clase CLASS_NO_MOSTRAR y se agrega la clase
+CLASS_MOSTAR, y pasa lo contrario en caso de que devuelva false.
+
+```
+Plantilla.editar 
+```
+
+Con esta clase se llama a las funciones necesarias para que podamos editar el form de los jugadores de nuestro programa
+
+```
+Plantilla.cancelar
+```
+
+Con esta clase se llama a las funciones necesarias para que podamos cancelar los datos que ibamos a editar en 
+el form de los jugadores de nuestro programa
+
+```
+Plantilla.guardar
+```
+Se encarga de enviar los datos del formulario a través de una solucitud a una URL; paraa después poder guardar estos datos
+y mostrarlos en pantalla con la función Plantilla.mostar.
+
+
+> ms-Plantilla/callbacks.js
+
+```
+getTodos
+setTodos
+```
+
+Son los que se encargan de llamar a la base de datos cada vez que hacemos un cambio en el programa.
+
+> ms-Plantilla/routes.js
+
+```
+router.get("/getTodos"
+router.post("/setTodos"
+```
+
+![Captura de la tabla con el boton nuevo](./assets/img/HU12.PNG)
+*Tabla cuando seleccionas editar.* &#8593;
+
+![La informacion al darle a mostrar](./assets/img/HU_12.2.PNG)
+*Tabla al cambiar un campo (en este caso el nombre) y le das a guardar.* &#8593;
+
+###TRELLO HU_12
+![Captura de la segunda HU en Trello](./assets/img/T_12.PNG)
+*Trello al comenzar la HU.* &#8593;
+
+![Captura de la segunda HU en Trello](./assets/img/T_12.2.PNG)
+*Trello al acabar la HU.* &#8593;
