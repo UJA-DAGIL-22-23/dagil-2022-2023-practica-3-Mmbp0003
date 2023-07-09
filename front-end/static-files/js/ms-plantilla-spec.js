@@ -247,7 +247,7 @@ describe("Plantilla.recuperaUnJugador: ", function() {
 })
 
 
-//---------------------------------TDD HU12-----------------------------------------
+//---------------------------------TDD HU12 && HU 13-----------------------------------------
 
 describe("Plantilla.Modificar", function (){
         beforeEach(function () {
@@ -261,12 +261,37 @@ describe("Plantilla.Modificar", function (){
         it('existe la función Modificar', () => {
             expect (Plantilla.Modificar).toBeDefined();
         });
-
         it("se pueden modificar los datos editables", function () {
             Plantilla.Modificar(false);
             expect(document.getElementById("habilitar").disabled).toEqual(false);
-        })
+        });
+        it("No se pueden modificar los datos editables", function () {
+          Plantilla.Modificar(true);
+         expect(document.getElementById("habilitar").disabled).toEqual(true);
+        });
 
+})
+
+describe("Plantilla.editar", function () {
+    it ('existe la funcion editar', () => {
+        expect(Plantilla.editar).toBeDefined();
+    })
+
+    it("Conecta y funciona correctamente con ocultarOpcionesSecundarias", function () {
+        spyOn(Plantilla, "ocultarOpcionesSecundarias");
+        Plantilla.editar();
+        expect(Plantilla.ocultarOpcionesSecundarias).toHaveBeenCalled();
+    });
+    it("Conecta y funciona correctamente con mostrarOcionesTerciariasEditar", function () {
+        spyOn(Plantilla, "mostrarOcionesTerciariasEditar");
+        Plantilla.editar();
+        expect(Plantilla.mostrarOcionesTerciariasEditar).toHaveBeenCalled();
+    });
+    it("Conecta y funciona correctamente con PermiteModificar", function () {
+        spyOn(Plantilla, "PermiteModificar");
+        Plantilla.editar();
+        expect(Plantilla.PermiteModificar).toHaveBeenCalled();
+    });
 })
 /*
 IMPORTANTE
