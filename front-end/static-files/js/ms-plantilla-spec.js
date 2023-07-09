@@ -294,6 +294,19 @@ describe("Plantilla.cancelar", function () {
     it ('existe la funcion cancelar', () => {
         expect(Plantilla.cancelar).toBeDefined();
     })
+    it("Conecta y funciona correctamente con las funciones de cancelar", function () {
+        spyOn(Plantilla, "imprimeUnJugador");
+        spyOn(Plantilla, "ImpideModificar");
+        spyOn(Plantilla, "ocultarOcionesTerciariasEditar");
+        spyOn(Plantilla, "mostrarOpcionesSecundarias")
+
+        Plantilla.cancelar();
+
+        expect(Plantilla.imprimeUnJugador).toHaveBeenCalled();
+        expect(Plantilla.ImpideModificar).toHaveBeenCalled();
+        expect(Plantilla.ocultarOcionesTerciariasEditar).toHaveBeenCalled();
+        expect(Plantilla.mostrarOpcionesSecundarias).toHaveBeenCalled();
+    });
 });
 /*
 IMPORTANTE
